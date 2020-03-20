@@ -27,5 +27,34 @@ ajax提交403错误
     git remote add origin git@github.com:pmb2020/larblog.git
     再使用上面的命令查询，就会有我们更添加的仓库地址了
 3、代码提交到GitHub
+    git add .
+    git commit -m '提交的代码说明'
+    git push origin -f master (加上-f是强制推送的意思，第一次嘛，不加会报错，因为在GitHub刚创建仓库的时候，会
+    生成一个git文件，推送的时候会和本地的有冲突，所以第一次使用 -f 强制推送)
+
+那么怎么下载一个laravel项目呢
+    git clone git@github.com:pmb2020/larblog.git
+    进入项目目录，composer install (安装依赖)
+
+    这时候如果你访问这个项目，你会发现出现laravel500错误，那么请继续往下看
+    mv .env.example .env （Linux重命名env文件命令，windows手动即可）
+    使用php artisan key:generate命令生成一个key密钥
+
+    下面就是在env文件中配置数据库信息了，
+    配置好数据库之后，再执行下面命令来初始化数据
+    php artisan migrate （执行迁移，创建数据表）
+    php artisan db:seed  （执行数据填充）
+
+    如果一切正常的话，项目已经可以正常访问了。
+
+    说明：storage 和 bootstrap/cache需要写的权限（Linux环境记得配置）
+    记得配置nginx伪静态（laravel官网提供）
+    location / {
+        try_files $uri $uri/ /index.php$is_args$query_string;
+    }
+
+
+
+
 
 
