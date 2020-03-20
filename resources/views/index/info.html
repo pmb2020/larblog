@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>可以平凡，但不能自暴自弃 - K先生个人博客</title>
+		<meta name="Keywords" content="可以平凡，但不能自暴自弃,个人博客,K先生">
+		<meta name="Description" content="可以做一个平凡的人，可以普通，但绝不能自暴自弃。这是今天我想对自己说的话。&nbsp;时间有时候觉得过得很快，真的很快，但是又有时候，人生真的是挺无聊，对于我来说，每一周都过着一模一样的生活，周一到周五，上班下班，加班，回家，睡觉；周六周日，要么两天都宅在家里，要么给自己找个不宅的理由，趁着周日下午">
+		<!-- <link rel="stylesheet" type="text/css" href="/static/admin/lib/fonticon/css/font-awesome.min.css" /> -->
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="lib/comment/css/comment.css" />
+		<style>
+			nav{background-color: #222;}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="container">
+				<h2 class="d_none"><img title="K先生个人博客" src="imgs/logo3.png" height="90px"></h2>
+				<!-- 移动端导航 -->
+				<div class="md_none" style="">
+					<div class="menu_div" style="">
+						<button id="menu_btn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+						<div style="text-align: center;">
+							<img src="imgs/mlogo.png" style="width: 150px">
+						</div>
+						<button id="search_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
+					</div>
+					<div style="height: 55px"></div>
+					<div class="m_nav_div" style="width: 0">
+						<ul class="m_nav_ul">
+							<li><a href="index.html">首页</a></li>
+							<li><a href="ajishu.html">爱技术</a></li>
+							<li><a href="ashare.html">爱分享</a></li>
+							<li><a href="alife.html">爱生活</a></li>
+							<li><a href="apinbo.html">爱拼搏</a></li>
+							<li><a href="gbook.html">留言板</a></li>
+							<li><a href="about.html">关于我</a></li>
+						</ul>
+					</div>
+					<div class="black_box" style="display: none;"></div>
+				</div>
+			</div>
+			<nav class="d_none">
+				<div class="container">
+					<ul>
+						<li><a href="index.html">首页</a></li>
+						<li><a href="ajishu.html">爱技术</a></li>
+						<li><a href="ashare.html">爱分享</a></li>
+						<li><a href="alife.html">爱生活</a></li>
+						<li><a href="apinbo.html">爱拼搏</a></li>
+						<li><a href="gbook.html">留言板</a></li>
+						<li><a href="about.html">关于我</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<div class="container" style="margin-top: 15px">
+			<div class="row">
+				<div class="col-md-7">
+					<div class="info_snav">
+						<p>当前位置：<a href="/">首页</a> > <a href="/alife.html">爱生活</a> > <a href="#">正文</a></p>
+					</div>
+					<div class="content" style="margin-top: 0;padding-top: 15px;">
+						<h2 class="line_h2">可以平凡，但不能自暴自弃</h2>
+						<div class="user_info">
+							<span><i id="user_ico" class="ico"></i>K先生</span>
+							<time><i id="time_ico" class="ico"></i>2019-12-01 15:43:16</time>
+							<span><i id="type_ico" class="ico"></i>爱生活</span><span><i id="read_ico" class="ico"></i>125</span>
+						</div>
+						<div class="blog_text">
+							<p>可以做一个平凡的人，可以普通，但绝不能自暴自弃。这是今天我想对自己说的话。&nbsp;</p>
+							<p>下面是测试，代码样式</p>
+							<p>下面是完整代码：</p>
+							<pre><code>&lt;?php<br>$data = 'username=pmb2020@163.com&amp;password=123456&amp;remember=1&amp;referer=https://www.imooc.com';<br>$ch = curl_init($url);<br>curl_setopt($ch, CURLOPT_HEADER, 0); //不显示head响应头<br>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); //不直接输出<br>curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); // 对认证证书来源的检查<br>curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); //从证书中检查SSL加密算法是否存在<br>curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 6.1 )"); //设置UA<br><br>date_default_timezone_set('PRC'); //使用cookie前需要设置时区<br>curl_setopt($ch, CURLOPT_COOKIE, session_name() . '=' . session_id()); //设置cookie<br>curl_setopt($ch, CURLOPT_COOKIESESSION, 1); //开启cookie会话<br>curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookiefile'); //加载cookie<br>curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookiefile'); //保存cookie<br><br>curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0); //跟踪重定向<br><br>curl_setopt($ch, CURLOPT_POST, 1);<br>curl_setopt($ch, CURLOPT_POSTFIELDS, $data);<br>curl_setopt($ch, CURLOPT_HTTPHEADER, array("application/x-www-from-urlencodeed;charset=utf-8", "Content-length:" . strlen($data)));<br>curl_exec($ch); //设置http请求头中的信息，以此让服务器认为是浏览器发出的请求<br><br>//第二部分<br>curl_setopt($ch, CURLOPT_URL, 'https://www.imooc.com/user/setbindsns');//登录之后的页面（个人设置）<br>curl_setopt($ch, CURLOPT_POST, 0);<br>curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type:text/html'));<br>$content = curl_exec($ch);<br>curl_close($ch);<br>echo $content;</code></pre><p>解释的话都在注释里面了，这里要说的一点是第一部分就是模拟登录，第二部分是我们登录成功后拿着cookie去访问其他的页面，当然记得把账号密码换成自己的哦。至于代码中的设置UA，其实在这个小实例中不设置也能成功的，不过为了多扩展一点嘛。UA简单的来说就是浏览器的一种标识，有的网站会检测UA，所以还是有必要了解一下的。对了还有还有模拟提交的参数要会自己找，F12打开开发者工具，找到<span style="color: rgb(194, 79, 74);">network</span>自己分析哈。</p><p>到这里也就结束了，老规矩，有问题的下方留言，你若问，我必答。</p>
+							<p>时间有时候觉得过得很快，真的很快，但是又有时候，人生真的是挺无聊，对于我来说，每一周都过着一模一样的生活，周一到周五，上班下班，加班，回家，睡觉；周六周日，要么两天都宅在家里，要么给自己找个不宅的理由，趁着周日下午出去转转。</p>
+							<p>可，自己的人生真的就要每天都这样日复一日、周复一周、月复一月，乃至年复一年吗？我反问自己。25岁了，我早就已经是成年人了，马上中年也要到来了。可反观自己的一举一动，所做所为，哪有一点儿成年人的模样？我还是那个畏畏缩缩、不擅交际，对周围的一切都充满恐惧的我。周围的任何动静都可能会成为我心慌的导火线。邻居的开关门声、门外的鞭炮声、窗外小孩子的嬉戏声，甚至是父母的咳嗽声……</p>
+							<p>我怎么了？我好像比以前还要敏感，还要恐惧这个世界。</p>
+							<p>写到这里，拿起酒罐，抿了一大口酒，最近这几天，在广州也觉得到冷了，冬天早已到来，很多地方也已经下起了2019年的第一场雪……</p>
+							<p>今天一天，我过的很迷茫，也很颓废。一直以来，好像很多时候都是这样，我可能一直在看似很努力，朝着渴望的成功奔跑。可是我或许也很清楚，很可能只是瞎跑，一直做着没有意义的事情。因为，我想不到什么有意义的事情可以去做。我想做的，早就已经有人成功的做了。这是一个最好的时代，这也是一个最坏的时代。互联网等科技的出现给人类的生活带来了极大的改变，但却改变不了很多人的焦虑，我便是之一。现在的一切，是数十年前没有人敢想象的。人类的生活是变得更好了，但是我的孤独却还是孤独，很多自己的事情只有自己才能改变。</p>
+							<p>以前的我一直以来都是一个被父母、亲戚、邻里称赞的好孩子，孝敬父母，除了不善言辞，好似没有什么别的缺点了。而现在呢？仿佛一切都变了！我成为了自己都讨厌的人-开始变得暴躁、开始嫌弃父母，烦父母，会因为父母的一些举止而感到生气，不理解父母，不站在他们的角度想，故意在父母面前表现的颓废，结果就真的是很颓废。我真的不喜欢这样的自己，但是，人有的时候真的很难控制自己。这或许就是一个弱者的表现吧，连自己的情绪都无法左右。我说过一句话，人在情绪激动的时候连自己都可以杀，更何况别人。或许这便是垃圾人的表现之一吧。</p>
+							<p>真的要改变自己了，人的好与坏、善与恶，很多时候只是一点点的距离。我可以容忍自己做一个平凡的人，但真的不能做一个自暴自弃的人，更不能做一个令人讨厌的人。</p>
+							<p>明天就是新的一月了，距离新的2020年也越来越近了。加油！从现在开始，change yourself.</p>
+							<p><br></p>
+							<p>--转载自《哆啦日记》&nbsp;<br></p>
+						</div>
+						<!-- 文章版权说明 -->
+						<div class="banquan" style="">
+							<p style="margin-bottom: 5px"><b>作者</b>：<a href="http://www.gold404.cn/about.html" style="margin-right: 15px">K先生</a><b>本文地址</b>：<a
+								 href="http://www.gold404.cn/info/47.html" title="可以平凡，但不能自暴自弃">http://www.gold404.cn/info/47.html</a></p>
+							<p><b>版权声明</b>：本文为原创文章，版权归 <a href="http://www.gold404.cn/">K先生个人博客</a> 所有，欢迎分享本文，转载请保留出处，谢谢！</p>
+						</div>
+						<!-- <div class="" style="text-align: center;margin: 10px;">
+		<button type="button" style="background-color: red;border: none;padding: 5px 10px;color: #fff;">👍赞一下（57）</button>
+	</div> -->
+						<div class="next_div">
+							<p>上一篇：
+								<a href="46.html">composer速度太慢？来试试各大厂商的镜像地址吧！</a>
+							</p>
+							<p>下一篇：
+								<a href="48.html">PhpStorm2019最新最简单的汉化教程</a>
+							</p>
+						</div>
+					</div>
+					<ul class="list_two li_dian" style="border-radius: 3px;">
+						<p class="div_top">猜你喜欢</p>
+						<li><a href="12.html">404页面萌酷纸飞机紫色星空背景</a></li>
+						<li><a href="24.html">K先生：今天不谈技术，来聊聊心情</a></li>
+						<li><a href="13.html">js实现人体时钟</a></li>
+						<li><a href="35.html">K先生：今天我们来做个约定吧</a></li>
+						<li><a href="34.html">PHP与Linux定时任务</a></li>
+						<li><a href="18.html">jQuery实现的上下滚动公告栏</a></li>
+					</ul>
+					<!-- 评论 -->
+					<div style="background-color: #fff;margin-top: 15px;margin-bottom: 15px;border-radius: 3px;">
+						<!-- <p class="div_top">文章评论</p> -->
+						<!-- <p style="color: #888;">暂无评论</p> -->
+						<div class="container">
+							<div class="comment_div">
+								<h5 class="com_h5" style="font-size: 16px;">文章评论</h5>
+								<form id="form0" action="#" method="post" onsubmit="return false">
+									<div class="com_top" style="display: flex;flex-wrap: wrap;">
+										<div style="flex: 0 0 50%;max-width:50%">
+											<div class="com_input_div" style="">
+												<label style="">昵称：</label>
+												<input class="com_input" type="text" name="username" value="">
+												<span class="com_tip" style=""><span style="color: red;">*</span> 必填项</span>
+											</div>
+											<div class="com_input_div">
+												<label style="">邮箱：</label>
+												<input class="com_input" type="email" name="email">
+												<span class="com_tip" style=""><span style="color: red;">*</span> 必填项</span>
+											</div>
+											<div class="com_input_div" style="">
+												<label style="">网址：</label>
+												<input class="com_input" type="text" name="href" placeholder="http://或https://开头哦">
+												<span class="com_tip">可选</span>
+											</div>
+										</div>
+										<div style="flex: 0 0 50%;max-width:50%;">
+											<div class="com_card" style="display: none;">
+												<div class="com_card_left" style="">
+													<img class="round" width="65" height="65" avatar="轻微的风">
+												</div>
+												<div class="com_card_right" style="">
+													<p>name：<span id="card_name"></span></p>
+													<p style="white-space: nowrap;">Email：<span id="card_email"></span></p>
+													<p>网址：<span id="card_href"></span></p>
+												</div>
+											</div>
+											<div class="create_com" style="height: 100%;width: 100%;">
+												<button id="create_btn" class="com_btn" style="">生成名片</button>
+											</div>
+										</div>
+										<div style="flex: 0 0 100%;margin-top: 15px;">
+											<div class="com_area_div" style="">
+												<textarea name="title" placeholder="写点什么..."></textarea>
+												<input onclick="comment()" class="com_btn" type="submit" name="" value="发表评论" />
+											</div>
+										</div>
+									</div>
+								</form>
+								<div class="com_bom">
+									<h5 class="com_h5">评论列表</h5>
+									<ul class="com_ul">
+										<p>暂时还没有评论哦！</p>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-3">
+
+					<aside style="margin-top: 0px;">
+						<p class="div_top">网易云热评</p>
+						<div class="hot_p">
+							<p class="music_p">走不通的路就回头，爱而不得的人就放手，得不到回应的热情就适可而止，别把一厢情愿当成满腔孤勇，也别把厌倦当成欲擒故纵。</p>
+							<!-- <blockquote>走不通的路就回头</blockquote> -->
+							<span>——出自网易云音乐热评《作家与小丑》</span>
+						</div>
+						<!-- <cite style="font-size: 14px;">我喜欢的歌没有火就像我喜欢的人从未喜欢过我</cite> -->
+					</aside>
+
+					<aside class="d_none" style="margin-top: 15px;">
+						<p class="div_top">热门文章</p>
+						<div class="flex_img min_img_p" style="margin-bottom: 15px;">
+							<img style="" src="imgs/default.jpg">
+							<div class="r_text">
+								<h3 class="ellipsis2"><a href="/info/23.html" target="_blank" title="bootstrap4实现侧边导航栏带隐藏按钮">bootstrap4实现侧边导航栏带隐藏按钮</a></h3>
+								<p class="bottom_num"><time>2018-12-09</time><span>浏览 408</span></p>
+							</div>
+						</div>
+						<div class="flex_img min_img_p" style="margin-bottom: 15px;">
+							<img style="" src="imgs/011.jpg">
+							<div class="r_text">
+								<h3 class="ellipsis2"><a href="/info/31.html" target="_blank" title="分享一款免费可商用的字体《问藏书房》">分享一款免费可商用的字体《问藏书房》</a></h3>
+								<p class="bottom_num"><time>2019-10-06</time><span>浏览 360</span></p>
+							</div>
+						</div>
+						<div class="flex_img min_img_p" style="margin-bottom: 15px;">
+							<img style="" src="./imgs/03.jpg">
+							<div class="r_text">
+								<h3 class="ellipsis2"><a href="/info/26.html" target="_blank" title="北漂之旅～新的征程">北漂之旅～新的征程</a></h3>
+								<p class="bottom_num"><time>2019-03-12</time><span>浏览 327</span></p>
+							</div>
+						</div>
+						<div class="flex_img min_img_p" style="margin-bottom: 15px;">
+							<img style="" src="imgs/011.jpg">
+							<div class="r_text">
+								<h3 class="ellipsis2"><a href="/info/24.html" target="_blank" title="K先生：今天不谈技术，来聊聊心情">K先生：今天不谈技术，来聊聊心情</a></h3>
+								<p class="bottom_num"><time>2018-12-12</time><span>浏览 289</span></p>
+							</div>
+						</div>
+						<div class="flex_img min_img_p" style="margin-bottom: 15px;">
+							<img style="" src="imgs/default.jpg">
+							<div class="r_text">
+								<h3 class="ellipsis2"><a href="/info/5.html" target="_blank" title="黑色炫酷html博客模板">黑色炫酷html博客模板</a></h3>
+								<p class="bottom_num"><time>2018-10-29</time><span>浏览 281</span></p>
+							</div>
+						</div>
+					</aside>
+					<aside class="d_none" style="margin-top: 15px;">
+						<p class="div_top">随机推荐</p>
+						<ul class="text_ul">
+							<li><a href="http://www.gold404.cn/info/3.html">>php环境搭建phpstudy<span>07-04</span></a></li>
+							<li><a href="http://www.gold404.cn/info/34.html">>PHP与Linux定时任务<span>07-04</span></a></li>
+							<li><a href="http://www.gold404.cn/info/24.html">>K先生：今天不谈技术，来聊聊心情<span>07-03</span></a></li>
+							<li><a href="http://www.gold404.cn/info/22.html">>网站改版后，网站内页一直不被收录时，我做了什么<span>07-01</span></a></li>
+							<li><a href="http://www.gold404.cn/info/14.html">>win10永久激活工具<span>07-01</span></a></li>
+							<li><a href="http://www.gold404.cn/info/5.html">>黑色炫酷html博客模板<span>07-02</span></a></li>
+							<li><a href="http://www.gold404.cn/info/1.html">>K先生<span>10-25</span></a></li>
+						</ul>
+					</aside>
+
+				</div>
+			</div>
+		</div>
+		<footer style="height: 80px;background-color: #1C2327;margin-top: 30px">
+			<p style="text-align: center;color: #b9b9b9;padding-top: 20px;">本博客由K先生设计开发，版权所有</p>
+			<p style="text-align: center;color: #b9b9b9;">备案号：<a style="color: #b9b9b9" href="http://beian.miit.gov.cn" target="_blank">豫ICP备16027903号-3</a></p>
+		</footer>
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<!-- <script type="text/javascript" src="lib/laycode/laycode.js"></script> -->
+		<script src="lib/comment/js/headimg.js"></script>
+		<!-- <script type="text/javascript" src="lib/comment/js/comment.js"></script> -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('pre').laycode({
+					title: 'K先生的代码',
+					skin: 1,
+					by: false
+				});
+				//文章h3标题的文章样式
+				var h3 = $('.blog_text h3');
+				h3.each(function() {
+					$(this).html('<span>' + $(this).text() + '</span>');
+				})
+			})
+		</script>
+
+	</body>
+
+</html>

@@ -1,0 +1,76 @@
+1、laravel安装完成之后，进入项目查看laravel版本。php artisan --version
+
+2、测试一下路由
+    在routes/web.php中随便写一个路由,并在浏览器访问
+    例子：
+    Route::get('/test',function (){
+        return '这是一个测试路由';
+    });
+
+3、多了解一下路由
+    上面我们说的就是get请求的路由，现在我们来看一个post的路由
+    Route::post('/test',function (){
+    return '这是一个测试路由';
+    });
+    浏览器无法访问了，因为这是一个值允许post的路由
+
+4、了解一下控制器
+   使用命令创建一个IndexController控制器：php artisan make:controller IndexController
+    在控制器中写test方法：
+    public function test(){
+        return '我是IndexController控制器下的test方法哦';
+    }
+    通过路由访问该控制器：
+    写路由：Route::get('/test1','IndexController@test');
+    可以访问了。
+
+5、了解一下怎么向视图层传递数据
+    修改laravel首页路由，其对应的是welcome视图模板，
+Route::get('/', function () {
+return view('welcome',['name'=>'迷鹿先生']);
+});
+向welcome视图层传递了变量$name,在视图层调用该变量，任意位置添加"{{$name}}"
+在控制器中：
+return view('test', $data);
+
+6、了解一下数据库
+    打开数据库配置文件.env,修改相关信息
+    在IndexController控制器下的test方法，写数据查询：
+    $users = DB::select('select * from users');
+    需要引入DB类，use Illuminate\Support\Facades\DB;
+    打印即可看到结果。
+    更多数据库操作方法看文档。
+
+7、了解一下模型
+    创建模型：php artian make:model /Http/Models/wangbo
+    模型内不用写，在控制器中写：
+    use App\Http\Models\wangbo;
+    $res= wangbo::all();
+    即可查询wangbos表中的数据，除了all()还可以用get()加条件查询.
+    说明：toArray()将结果集转换城数组
+
+    控制器访问model中方法：$user = new userModel();$user->test();
+
+8、数据库迁移
+    创建一个迁移文件：php artisan make:migration create_wangbos_table
+    执行迁移:php artisan migrate
+
+9、了解一下中间件
+    创建中间件：php artisan make:middleware CheckAge
+
+10、数据填充
+       创建填充文件：php artisan make:seeder UsersTableSeeder
+       在文件中写数据库操作，在默认DatabaseSeeder调用
+        $this->call([
+           UsersTableSeeder::class,
+        ]);
+       执行填充
+       php artisan db:seed 或者
+       php artisan db:seed --class=UsersTableSeeder（执行指定的数据填充文件）
+
+        第二部分：博客项目开发
+
+    初始化，先迁移再填充数据
+    php artisan migrate
+    php artisan db:seed
+

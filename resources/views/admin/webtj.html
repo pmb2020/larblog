@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>迷鹿后台管理系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<link rel="stylesheet" type="text/css" href="lib/fonticon/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+	</head>
+	<body>
+		<header class="header">
+			<div class="header_l" style="">
+				<div class="logo">
+					<a href="#"><img src="images/logo.png" /></a>
+				</div>
+				<button id="bar" style="">
+					<i class="fa fa-bars" aria-hidden="true" style="font-size: 28px;color: #fff;"></i>
+				</button>
+			</div>
+			<div class="header_r" style="">
+				<ul class="header_ul ">
+					<li><i class="fa fa-bell-o icon_fff min_num" aria-hidden="true"><span>2</span></i></li>
+					<li id="avatar">
+					<img src="images/author.png" alt="">
+					<span class="header_name d-none">管理员</span>
+					<i class="fa fa-sort-desc icon_fff d-none" aria-hidden="true"></i>
+					<div class="avatar_box" style="display: none;">
+						<ul>
+							<li>设置</li>
+							<li><a href="#">退出</a></li>
+						</ul>
+					</div>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<nav class="nav">
+			<ul class="nav_ul">
+				<!-- <li><a href="index2.blade.php"><i class="fa fa-home" aria-hidden="true"></i>后台首页</a></li>
+				<li><a href="write.html"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>发表文章</a></li>
+				<li><a href="list.html"><i class="fa fa-book" aria-hidden="true"></i>文章管理<i style="margin-left: 80px;" class="fa fa-sort-desc"
+						 aria-hidden="true"></i></a></li>
+				<li><a href="comment.html"><i class="fa fa-comments" aria-hidden="true"></i>评论管理</a></li>
+				<li><a href="webtj.html"><i class="fa fa-line-chart" aria-hidden="true"></i>网站统计</a></li>
+				<li><a href="webset.html"><i class="fa fa-cog" aria-hidden="true"></i>系统设置</a></li> -->
+
+				<li><a href="index/index.blade.php"><i class="fa fa-home fa-fw" aria-hidden="true"></i>后台首页</a></li>
+				<li><a href="list.html"><i class="fa fa-book fa-fw" aria-hidden="true"></i>文章管理</a></li>
+				<li><a href="write.html"><i class="fa fa-table fa-fw" aria-hidden="true"></i>分类管理</a></li>
+				<li><a href="#"><i class="fa fa-tags fa-fw" aria-hidden="true"></i>标签管理</a></li>
+				<li><a href="comment.html"><i class="fa fa-comments fa-fw" aria-hidden="true"></i>评论管理</a></li>
+				<li><a href="#"><i class="fa fa-link fa-fw" aria-hidden="true"></i>友链管理</a></li>
+				<li><a href="webtj.html"><i class="fa fa-area-chart fa-fw" aria-hidden="true"></i>网站统计</a></li>
+				<li><a href="webset.html"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>系统设置</a></li>
+			</ul>
+		</nav>
+
+		<div class="main" style="">
+			<div class="main-content">
+				<div class="main-top">
+					<p class="mbaoxie"><a href="/">首页</a><span>/</span>网站统计</p>
+					<p class="main-gg">公告：欢迎光临我的后台管理系统，我求求你嫁给w我！</p>
+				</div>
+
+				<div class="box_padd30">
+					<div class="main-box" style="">
+						<p style="font-size: 15px;font-weight: 400;">网站流量</p>
+						<table class="table add_border0">
+							<thead>
+								<tr>
+									<td></td>
+									<td>浏览量(PV)</td>
+									<td>访客数(UV)</td>
+									<td>IP数</td>
+									<td>平均访问时长</td>
+								</tr>
+							</thead>
+							<tbody class="right_border">
+								<tr>
+									<td>今日</td>
+									<td>45</td>
+									<td>4</td>
+									<td>2</td>
+									<td>00:54</td>
+								</tr>
+								<tr>
+									<td>昨日</td>
+									<td>425</td>
+									<td>42</td>
+									<td>23</td>
+									<td>00:54</td>
+								</tr>
+								<tr>
+									<td>最近7天</td>
+									<td>4775</td>
+									<td>4454</td>
+									<td>2455</td>
+									<td>00:54</td>
+								</tr>
+								<tr>
+									<td>最近30天</td>
+									<td>67275</td>
+									<td>24454</td>
+									<td>22455</td>
+									<td>00:54</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="main-box " style="">
+						<ul class="ul_tag" style="border-bottom: 0;">
+							<li class="active"><a href="#">全部(540)</a></li>
+							<li><a href="#">PC端(425)</a></li>
+							<li><a href="#">移动端(145)</a></li>
+						</ul>
+						<table class="table addtable1">
+							<thead>
+								<tr style="background-color: #f2f2f2;">
+									<th>id</th>
+									<th>访问时间</th>
+									<th>地域</th>
+									<th>来源</th>
+									<th>入口页面</th>
+									<th>访问IP</th>
+									<th>访问时长</th>
+									<th>访问页数</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>1</th>
+									<td>2019/09/01 <br>20:44:50</td>
+									<td>北京</td>
+									<td>直接访问</td>
+									<td>http://www.gold404.cn</td>
+									<td>113.100.254.127</td>
+									<td>52"</td>
+									<td>2</td>
+								</tr>
+								<tr>
+									<th>2</th>
+									<td>2019/09/01<br>20:44:50</td>
+									<td>河南</td>
+									<td>直接访问</td>
+									<td>http://www.gold404.cn</td>
+									<td>113.100.254.127</td>
+									<td>52"</td>
+									<td>2</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script src="js/base.js"></script>
+</html>

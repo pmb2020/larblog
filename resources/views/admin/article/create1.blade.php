@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>迷鹿后台管理系统</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<link rel="stylesheet" type="text/css" href="lib/fonticon/css/font-awesome.min.css" />
+
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+		<style>
+			/* 编辑器 */
+			/* .w-e-toolbar .w-e-menu{padding: 10px 15px!important;}
+			.w-e-text-container{height: 380px!important;}
+			@media screen and (max-width:576px) {
+			#editor{width: 100%!important;}
+			.w-e-toolbar .w-e-menu{padding: 8px 10px!important;}
+			.w-e-text-container{height: 300px!important;}
+			} */
+
+		</style>
+	</head>
+	<body>
+		<header class="header">
+			<div class="header_l" style="">
+				<div class="logo">
+					<a href="#"><img src="images/logo.png" /></a>
+				</div>
+				<button id="bar" style="">
+					<i class="fa fa-bars" aria-hidden="true" style="font-size: 28px;color: #fff;"></i>
+				</button>
+			</div>
+			<div class="header_r" style="">
+				<ul class="header_ul ">
+					<li><i class="fa fa-bell-o icon_fff min_num" aria-hidden="true"><span>2</span></i></li>
+					<li id="avatar">
+					<img src="images/author.png" alt="">
+					<span class="header_name d-none">管理员</span>
+					<i class="fa fa-sort-desc icon_fff d-none" aria-hidden="true"></i>
+					<div class="avatar_box" style="display: none;">
+						<ul>
+							<li>设置</li>
+							<li><a href="#">退出</a></li>
+						</ul>
+					</div>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<nav class="nav">
+			<ul class="nav_ul">
+				<li><a href="index/index.blade.php"><i class="fa fa-home fa-fw" aria-hidden="true"></i>后台首页</a></li>
+				<li><a href="list.html"><i class="fa fa-book fa-fw" aria-hidden="true"></i>文章管理</a></li>
+				<li><a href="write.html"><i class="fa fa-table fa-fw" aria-hidden="true"></i>分类管理</a></li>
+				<li><a href="#"><i class="fa fa-tags fa-fw" aria-hidden="true"></i>标签管理</a></li>
+				<li><a href="comment.html"><i class="fa fa-comments fa-fw" aria-hidden="true"></i>评论管理</a></li>
+				<li><a href="#"><i class="fa fa-link fa-fw" aria-hidden="true"></i>友链管理</a></li>
+				<li><a href="webtj.html"><i class="fa fa-area-chart fa-fw" aria-hidden="true"></i>网站统计</a></li>
+				<li><a href="webset.html"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>系统设置</a></li>
+			</ul>
+		</nav>
+
+		<div class="main" style="">
+			<div class="main-content">
+				<div class="main-top">
+					<p class="mbaoxie"><a href="/">首页</a><span>/</span>写文章</p>
+					<p class="main-gg">公告：欢迎光临我的后台管理系统，我求求你嫁给w我！</p>
+				</div>
+				<div class="box_padd30">
+					<div class="main-box">
+						<!-- <label>标题：</label>
+						<div style="width: 40%;display: inline-block;">
+							<input class="form-control" type="text" name="" id="" placeholder="标题" />
+						</div> -->
+						<form action="" method="POST">
+							<div class="m_input_item">
+								<label>标题:</label>
+								<div class="m_input_box"><input class="m_input" type="text" name="title"></div>
+							</div>
+							<div class="m_input_item">
+								<label>类别：</label>
+								<select id="type" name="type" class="m_select">
+									<option value="0">爱生活</option>
+									<option value="1">爱技术</option>
+									<option value="2">爱分享</option>
+									<option value="3">爱拼搏</option>
+								</select>
+								<div id="stype">
+									<label>小分类：</label>
+									<select class="m_select">
+										<option value="4">html</option>
+										<option value="5">js</option>
+										<option value="6">其他</option>
+									</select>
+								</div>
+							</div>
+							<div class="simeditor_div" style="display: flex;margin: 30px 0;">
+								<label style="width: 60px;">内容：</label>
+								<textarea id="editor" placeholder="Balabala" autofocus></textarea>
+							</div>
+							<!-- <div class="m_input_item" style="height: 100%;overflow: hidden;">
+								<label>内容：</label>
+								<input type="hidden" name="content" id="editor_txt">
+								<div id="editor" style="display: inline-block;width: 80%">
+								</div>
+							</div> -->
+							<div class="m_input_item" style="height: 180px">
+								<label>封面:</label>
+								<input type="hidden" id="img_url"  name="img_url">
+								<div id="drop_area" class="m_input_box"></div>
+							</div>
+							<div class="m_input_item">
+								<label></label>
+								<button id="fb_btn" class="m_btn" type="submit">发布</button>
+								<button class="m_btn" type="button">存草稿</button>
+							</div>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/wangEditor.min.js"></script>
+	<script src="js/upload.js"></script>
+	<script src="js/base.js"></script>
+	<script src="lib/simditor/js/module.js"></script>
+	<script src="lib/simditor/js/hotkeys.js"></script>
+	<script src="lib/simditor/js/uploader.js"></script>
+	<script src="lib/simditor/js/simditor.js"></script>
+	<script>
+		$(function(){
+			var editor = new Simditor({
+			  textarea: $('#editor'),
+			  toolbar: [
+			          'title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale',
+			          'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link',
+			          'image', 'hr', '|', 'alignment'
+			      ],
+			  placeholder:'写点什么呢......',
+			  defaultImage:'images/author.png',//插入图片显示的默认图片
+			  params:{
+				  'key':'v'
+			  },//在textarea中插入一个隐藏的输入以存储参数
+			  pasteImage:true,//是否允许直接粘贴图片
+			  cleanPaste:true,//自动删除粘贴内容中的所有样式
+			  upload:{
+				  url:'/api/api.php',
+				  params:null,
+				  fileKey:'uploadFile',//后台接收图片需要
+				  connectionCount:3,//允许同时上传图片数
+				  leaveConfirm:'正在上传图片',//如果在上传文件时离开页面，则会显示此消息；
+			  }
+			});
+		});
+	</script>
+	<script type="text/javascript">
+			var file='';
+			var dragImgUpload = new DragImgUpload("#drop_area",{
+			callback:function (files) {
+			//回调函数，可以传递给后台等等
+			var file = files[0];
+			// console.log(file);
+			var formdata = new FormData();
+			formdata.append("file" , file);
+			$.ajax({
+	        		url:'/admin.php/index/upload',
+	        		type:'POST',
+	        		data:formdata,
+	        		dataType:'json',
+	        		processData: false,// 不处理数据
+	                contentType: false,//不设置Content-Type请求头
+	        		success:function (data) {
+	        			console.log(data);
+	        			console.log(typeof(JSON.parse(data)));
+	        			var img_url=JSON.parse(data)['data'][0].slice(16);
+	        			$('#img_url').val(img_url);
+	        			// console.log('成功1111');
+	        		},
+	        		error:function (data) {
+	        			// console.log(data);
+	        			console.log('图片上传失败');
+	        		}
+
+	        	})
+		}
+	})
+		</script>
+	<script type="text/javascript">
+	    var E = window.wangEditor;
+	    var editor = new E( document.getElementById('editor'));
+	    editor.customConfig.debug = true;
+	    editor.customConfig.uploadImgServer = '/admin.php/index/upload';
+	    editor.customConfig.uploadImgMaxSize = 5 * 1024 * 1024;
+		editor.customConfig.uploadImgMaxLength = 5;
+		editor.customConfig.height=800;
+		editor.customConfig.uploadFileName = 'file';
+		// 自定义菜单配置
+		    editor.customConfig.menus = [
+		        'head',  // 标题
+		        'bold',  // 粗体
+		        'fontSize',  // 字号
+		        'foreColor',  // 文字颜色
+		        'backColor',  // 背景颜色
+		        'link',  // 插入链接
+		        'list',  // 列表
+		        'justify',  // 对齐方式
+		        'quote',  // 引用
+		        'emoticon',  // 表情
+		        'image',  // 插入图片
+		        'table',  // 表格
+		        'video',  // 插入视频
+		        'code',  // 插入代码
+		        'undo',  // 撤销
+		    ]
+			if($(document).width()<=576){
+				editor.customConfig.menus = [
+				    'head',  // 标题
+				    'bold',  // 粗体
+				    'foreColor',  // 文字颜色
+				    'backColor',  // 背景颜色
+				    'link',  // 插入链接
+				    'quote',  // 引用
+				    'emoticon',  // 表情
+				    'image',  // 插入图片
+				    'undo',  // 撤销
+				]
+			}
+	    editor.create();
+
+	    $('#fb_btn').click(function () {
+	    	var editor_txt=editor.txt.html();
+	    	document.getElementById('editor_txt').value=editor_txt;
+			alert('ss');
+			return false;
+	    	console.log(file);
+	    });
+		$('.m_btn').click(function(){
+			$('#editor').val();
+			console.log($('#editor').val());
+		});
+
+	    $('#type').change(function (e) {
+	    	if ($(this).val()==2) {
+	    		console.log('asa');
+	    		$('#stype').css('display','inline-block');
+	    		$('#stype select').attr('name','type');
+	    	}else{
+	    		$('#stype').css('display','none');
+	    		$('#stype select').attr('name','');
+	    	}
+	    })
+	</script>
+</html>

@@ -1,0 +1,31 @@
+phpstudy nginx伪静态报错。
+解决：phpstudy中伪静态：
+location / {
+    try_files $uri $uri/ /index.php$is_args$query_string;
+}
+
+在相关配置文件：include D:/phpstudy_pro/WWW/web/demoblog/public/nginx.htaccess;
+不加最上面会报路径错误。
+
+ajax提交403错误
+原因：csrf保护，加header头
+
+
+抖音已经火的网红需要链接到互联网，个人ip网站诞生
+文案：
+1、标题：K先生 - 一个90后程序员，
+
+
+
+怎么把laravel项目上传到GitHub上
+前提：先在GitHub上创建好一个仓库
+1、初始化：git init
+2、添加GitHub上的仓库地址
+    git remote --v   查看git远程仓库地址
+    发现是空的，很正常，下面我们来添加我们的远程仓库地址
+
+    git remote add origin git@github.com:pmb2020/larblog.git
+    再使用上面的命令查询，就会有我们更添加的仓库地址了
+3、代码提交到GitHub
+
+
