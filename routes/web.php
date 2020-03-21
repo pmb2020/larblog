@@ -29,28 +29,35 @@ Route::get('/dbtest','IndexController@dbtest');
 Route::get('/model/test','IndexController@modeltest');
 
 //下面为博客所用路由
-Route::get('/admin/login','Admin\LoginController@login');
-Route::post('/admin/checkLogin','admin\LoginController@checkLogin');
-Route::get('/admin/getChildCategory/{pid}','admin\CategoryController@getChildCategory');
 
-Route::prefix('admin')->middleware(['age'])->group(function (){
-    Route::get('/index','admin\IndexController@index');
-    Route::get('/article/index','admin\ArticleController@index');
-    Route::get('/loginOut','admin\LoginController@loginOut');
-    Route::post('/article/coverUpload','admin\ArticleController@coverUpload');
-    Route::post('/article/imagesUpload','admin\ArticleController@imagesUpload');
-    Route::any('/article/create','admin\ArticleController@create');
-    Route::any('/article/delete/{id}','admin\ArticleController@delete');
+Route::namespace('Admin')->prefix('admin')->group(function (){
+    Route::get('login','LoginController@login');
+    Route::post('checkLogin','LoginController@checkLogin');
+    Route::get('getChildCategory/{pid}','CategoryController@getChildCategory');
+
+    Route::middleware(['age'])->group(function (){
+        Route::get('/','IndexController@index');
+//        Route::get('/index','IndexController@index');
+        Route::get('article/index','ArticleController@index');
+        Route::get('loginOut','LoginController@loginOut');
+        Route::post('article/coverUpload','ArticleController@coverUpload');
+        Route::post('article/imagesUpload','ArticleController@imagesUpload');
+        Route::any('article/create','ArticleController@create');
+        Route::any('article/delete/{id}','ArticleController@delete');
+    });
 });
 
 
 //博客前台路由
-Route::get('/','index\IndexController@index');
-Route::get('/ashare','index\IndexController@ashare');
-Route::get('/ashare/{id}','index\IndexController@ashareType');
-Route::get('/ajishu','index\IndexController@ajishu');
-Route::get('/alife','index\IndexController@alife');
-Route::get('/apinbo','index\IndexController@apinbo');
-Route::get('/gbook','index\IndexController@gbook');
-Route::get('/about','index\IndexController@about');
-Route::get('/info/{id}','index\InfoController@index');
+Route::namespace('Index')->group(function (){
+    Route::get('/','IndexController@index');
+    Route::get('ashare','IndexController@ashare');
+    Route::get('ashare/{id}','IndexController@ashareType');
+    Route::get('ajishu','IndexController@ajishu');
+    Route::get('alife','IndexController@alife');
+    Route::get('apinbo','IndexController@apinbo');
+    Route::get('gbook','IndexController@gbook');
+    Route::get('about','IndexController@about');
+    Route::get('info/{id}','InfoController@index');
+});
+
