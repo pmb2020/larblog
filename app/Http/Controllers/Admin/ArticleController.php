@@ -22,7 +22,7 @@ class ArticleController extends Controller
 
     //  文章内图片上传
     public function imagesUpload(Request $request){
-        return $this->uploadImg($request,'uploads/images');
+        return $this->uploadImg($request,'uploads/images/'.date('Ymd'));
     }
     //  封面图上传
     public function coverUpload(Request $request){
@@ -61,16 +61,20 @@ class ArticleController extends Controller
     public function uploadImg($request,$path){
 //        $image=$_FILES['file'];
         if ($request->isMethod('POST')){
+            if (!is_dir('uploads')){
+                mkdir('uploads',755);
+            }
             $file = $request->file('file');
-            $rule = ['jpg', 'png', 'gif'];
+            $rule = ['jpg', 'png', 'gif','bmp','jpeg'];
             if ($file->isValid()){
                 $entension=$file -> getClientOriginalExtension();//扩展名
                 if (!in_array($entension, $rule)) {
-                    $msg='图片格式为jpg,png,gif';
+                    $msg='图片格式为jpg,png,gif,bmp,jpeg';
+                }else{
+                    $fileName = uniqid() . '.' . $entension;
+                    $file -> move($path, $fileName);
+                    $path= '/' . $path . '/'. $fileName;
                 }
-                $fileName = date('Ymd') . uniqid() . '.' . $entension;
-                $file -> move($path, $fileName);
-                $path= '/' . $path . '/'. $fileName;
             }
         }
         $arr=[
