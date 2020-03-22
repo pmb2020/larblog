@@ -16,6 +16,12 @@ ajax提交403错误
 1、标题：K先生 - 一个90后程序员，
 
 
+更改分页模板：
+php artisan vendor:publish --tag=laravel-pagination
+这个命令将在 resources/views/vendor/pagination 目录中放置这些视图
+内置在该目录下的 bootstrap-4.blade.php 文件提供了默认的分页视图。你可以编辑这个文件来修改分页的 HTML
+
+
 
 怎么把laravel项目上传到GitHub上
 前提：先在GitHub上创建好一个仓库

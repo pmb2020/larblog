@@ -254,7 +254,7 @@ width: 14px;height: 14px;margin-right: 5px;vertical-align: middle;position: rela
 }
 .pagination li {
     display: inline-block;
-    margin: 0 10px;
+    margin: 5px 2px;
 }
 .pagination .active span {
     padding: 5px 15px;

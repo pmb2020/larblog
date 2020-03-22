@@ -11,9 +11,7 @@ class IndexController extends Controller
 {
     //
     public function index(){
-        $articles=Article::with('Category:id,pid,name')->orderBy('is_top','desc')->orderBy('id','desc')->paginate(3);
-//        $articles=Article::with('Category')->find(1);
-//        $articles=Category::all();
+        $articles=Article::with('Category:id,pid,name')->orderBy('is_top','desc')->orderBy('id','desc')->paginate(10);
 //        经过foreach之后数据比限定的id,pid,name更多，with失效（原因不明）
         foreach ($articles as &$v){
             if ($v->category->pid!=0){
@@ -26,9 +24,11 @@ class IndexController extends Controller
         ]);
     }
     public function ashare(){
-        $articles=$this->getArticle(2,2);
+//        $articles=$this->getArticle(2,2);
+        $articles=Article::join('categories','articles.category_id','=','categories.id')
+        ->where('categories.pid','=',2)->orderBy('articles.id','desc')->paginate(16);
         $categorys=Category::where('pid',2)->get();
-//        dd($categorys);
+//        dd($articles->toArray());
         return view('index.ashare',[
             'articles' =>$articles,
             'categorys'=>$categorys,
@@ -36,7 +36,7 @@ class IndexController extends Controller
         ]);
     }
     public function ashareType($id){
-        $articles=$this->getArticle($id,2);
+        $articles=$this->getArticle($id,16);
         $categorys=Category::where('pid',2)->get();
 //        dd($articles->toArray());
         return view('index.ashare',[
@@ -46,13 +46,13 @@ class IndexController extends Controller
         ]);
     }
     public function ajishu(){
-        $articles=$this->getArticle(1,2);
+        $articles=$this->getArticle(1,10);
         return view('index.ajishu',[
             'articles' =>$articles
         ]);
     }
     public function alife(){
-        $articles=$this->getArticle(3,2);
+        $articles=$this->getArticle(3,10);
         return view('index.alife',[
             'articles' => $articles
         ]);
