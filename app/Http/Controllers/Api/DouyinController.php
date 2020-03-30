@@ -29,7 +29,7 @@ class DouyinController extends Controller
         $result=curl_exec($ch);
         $pattern1='/playAddr: "(.*?)"/';
         $pattern2='/cover: "(.*?)"/';
-        $pattern3='/<p class="desc">(.*?)<\/p>/i';//匹配视频描述
+        $pattern3='/<p class="desc">(.*?)<\/p>/is';//匹配视频描述
         $pattern4='/<p class="name nowrap">@(.*?)<\/p>/i';//匹配视频作者
         preg_match($pattern1,$result,$playAddr);
         preg_match($pattern2,$result,$cover);
@@ -43,9 +43,9 @@ class DouyinController extends Controller
         $real_video = curl_getinfo($ch)['url'];
         curl_close($ch);
         $data=[
-            'name' => $name[1],
-            'title' => $title[1],
-            'cover' =>$cover[1],
+            'author' => $name[1]??'',
+            'title' => str_replace("\n","",$title[1])??'',//去除换行
+            'cover' =>$cover[1]??'',
             'real_video' =>substr($real_video,0,stripos($real_video,'?'))
         ];
         return $this->responseJson(200,'success',$data);
