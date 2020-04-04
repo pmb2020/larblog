@@ -82,8 +82,8 @@ header h2 {
 	font-size: 28px;
 }
 nav {
-	/* #543e37 #7e2284 #603d29 #755e97 #385c96 #9203eb #0099FF*/
-	background-color:#229288;
+	/* #543e37 #7e2284 #603d29 #755e97 #385c96 #9203eb #0099FF #229288*/
+	background-color:#222222;
 	box-shadow: 0 2px 6px 0 rgba(34,146,136,.17);
 	height: 60px;
 }
