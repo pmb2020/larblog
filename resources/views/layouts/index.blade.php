@@ -12,6 +12,10 @@
     @show
     <style>
         nav{background-color: #222;}
+        body * {
+            -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+            filter: grayscale(100%);
+        }
     </style>
 </head>
 <body>
