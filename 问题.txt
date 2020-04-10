@@ -61,6 +61,8 @@ php artisan vendor:publish --tag=laravel-pagination
         try_files $uri $uri/ /index.php$is_args$query_string;
     }
 
+    执行了composer update命令
+
 
 
 
