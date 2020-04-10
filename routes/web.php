@@ -37,7 +37,7 @@ Route::namespace('Admin')->prefix('admin')->group(function (){
 
     Route::middleware(['age'])->group(function (){
         Route::get('/','IndexController@index');
-//        Route::get('/index','IndexController@index');
+        Route::get('/index','IndexController@index');
         Route::get('article/index','ArticleController@index');
         Route::get('loginOut','LoginController@loginOut');
         Route::post('article/coverUpload','ArticleController@coverUpload');

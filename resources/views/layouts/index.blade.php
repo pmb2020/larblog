@@ -10,13 +10,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('static/index/css/base.css')}}" />
     @section('style')
     @show
-    <style>
-        /*网站变灰色*/
-        /*body * {*/
-        /*    -webkit-filter: grayscale(100%); !* Chrome, Safari, Opera *!*/
-        /*    filter: grayscale(100%);*/
-        /*}*/
-    </style>
 </head>
 <body>
 {{--头部--}}
