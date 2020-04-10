@@ -62,7 +62,7 @@ php artisan vendor:publish --tag=laravel-pagination
     }
 
     执行了composer update命令
-
+    test
 
 
 
