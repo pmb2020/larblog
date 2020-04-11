@@ -32,8 +32,8 @@ class AppServiceProvider extends ServiceProvider
             $config[$v->name]=$v->value;
         }
         View::share([
-            'config'=>$config,
-            'smallTitle'=>Str::before($config['web_title'],'-')
+            'config'=>$config??'',
+            'smallTitle'=>Str::before($config['web_title']??'','-')
         ]);
     }
 }

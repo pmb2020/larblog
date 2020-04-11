@@ -67,7 +67,7 @@ return view('test', $data);
        执行填充
        php artisan db:seed 或者
        php artisan db:seed --class=UsersTableSeeder（执行指定的数据填充文件）
-
+        php artisan db:seed --class=ConfigsTableSeeder
         第二部分：博客项目开发
 
     初始化，先迁移再填充数据
