@@ -32,6 +32,7 @@ class IndexController extends Controller
         return view('index.ashare',[
             'articles' =>$articles,
             'categorys'=>$categorys,
+            'seoInfo'=>$this->getSeoInfo(2),
             'nowId' =>0 //做css标识用
         ]);
     }
@@ -42,23 +43,29 @@ class IndexController extends Controller
         return view('index.ashare',[
             'articles' =>$articles,
             'categorys'=>$categorys,
+            'seoInfo'=>$this->getSeoInfo($id),
             'nowId' =>$id //做css标识用
         ]);
     }
     public function ajishu(){
         $articles=$this->getArticle(1,10);
+//        dd($this->getSeoInfo(1));
         return view('index.ajishu',[
-            'articles' =>$articles
+            'articles' =>$articles,
+            'seoInfo'=>$this->getSeoInfo(1)
         ]);
     }
     public function alife(){
         $articles=$this->getArticle(3,10);
         return view('index.alife',[
-            'articles' => $articles
+            'articles' => $articles,
+            'seoInfo'=>$this->getSeoInfo(3)
         ]);
     }
     public function apinbo(){
-        return view('index.apinbo');
+        return view('index.apinbo',[
+            'seoInfo'=>$this->getSeoInfo(4)
+        ]);
     }
     public function gbook(){
         return view('index.gbook');
@@ -67,6 +74,9 @@ class IndexController extends Controller
         return view('index.about');
     }
 
+    public function getSeoInfo($id){
+        return Category::select('name','keywords','description')->find($id);
+    }
     /**获取文章数据
      * @param $category_id
      * @param $pageNum

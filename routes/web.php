@@ -44,6 +44,11 @@ Route::namespace('Admin')->prefix('admin')->group(function (){
         Route::post('article/imagesUpload','ArticleController@imagesUpload');
         Route::any('article/create','ArticleController@create');
         Route::any('article/delete/{id}','ArticleController@delete');
+
+        Route::get('category','CategoryController@index');
+        Route::get('comment','CommentController@index');
+        Route::get('config','ConfigController@index');
+        Route::any('config/save','ConfigController@saveConfig');
     });
 });
 

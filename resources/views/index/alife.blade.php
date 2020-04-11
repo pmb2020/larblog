@@ -1,14 +1,14 @@
 @extends('layouts.index')
 
-@section('title','爱生活 - K先生个人博客')
-@section('keywords','爱生活,K先生,K先生个人博客')
-@section('description','记录生活的点滴，心灵的橱窗-K先生个人博客')
+@section('title',$seoInfo->name.' - '.$smallTitle)
+@section('keywords',$seoInfo->keywords)
+@section('description',$seoInfo->description)
 
 @section('content')
     <div class="row">
         <div class="col-md-7">
             <p class="top_nav_P">
-                您现在的位置是：<a href="/">首页</a> > <a href="/">爱生活</a>
+                您现在的位置是：<a href="/">首页</a> > <a href="/">{{$seoInfo->name}}</a>
                 <span class="f_r music_p d_none">我喜欢生活，而不是为谁而生活</span>
             </p>
             <div style="margin-top: 15px;">
@@ -25,7 +25,7 @@
                                 <h2 class="line_h2 @if($article -> cover) ellipsis1 @endif"><a target="_blank" href="{{url('/info',[$article->id])}}">{{$article->title}}</a></h2>
                                 <p class="ellipsis2 @if($article -> cover) line3 @endif">{{$article->description}}</p>
                                 <div class="text_info">
-                                    <span><i id="user_ico" class="ico"></i>K先生</span>
+                                    <span><i id="user_ico" class="ico"></i>{{$config['web_author']}}</span>
                                     <time class="md_none_line"><i id="time_ico" class="ico"></i>@if($article -> cover) {{$article->created_at->format('Y-m-d')}} @else {{$article->created_at}} @endif</time>
                                     <time class="d_none"><i id="time_ico" class="ico"></i>{{$article->created_at}}</time>
                                     <span><i id="type_ico" class="ico"></i>{{$article->category->name}}</span><span><i id="read_ico" class="ico"></i>{{$article->read_num}}</span>

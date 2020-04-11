@@ -23,6 +23,13 @@ php artisan vendor:publish --tag=laravel-pagination
 这个命令将在 resources/views/vendor/pagination 目录中放置这些视图
 内置在该目录下的 bootstrap-4.blade.php 文件提供了默认的分页视图。你可以编辑这个文件来修改分页的 HTML
 
+laravel6报错：A facade root has not been set
+状态：待解决
+触发条件：因为想向公共视图传递数据，也就是需要公共变量，所以在config/global中查询数据库并且返回。可以直接返回，但查数据库报错
+其他解决方法：在app\Providers\AppServiceProvider.php中的boot()方法使用share()共享数据。
+View::share([
+     'config'=>$config,
+     ]);
 
 
 怎么把laravel项目上传到GitHub上

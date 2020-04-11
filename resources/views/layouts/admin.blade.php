@@ -44,12 +44,12 @@
         <li><a href="{{ url('admin/index') }}"><i class="fa fa-home fa-fw" aria-hidden="true"></i>后台首页</a></li>
         <li><a href="{{ url('admin/article/index') }}"><i class="fa fa-book fa-fw" aria-hidden="true"></i>文章管理</a></li>
         <li><a href="{{ url('admin/article/create') }}"><i class="fa fa-table fa-fw" aria-hidden="true"></i>发表文章</a></li>
-        <li><a href="#"><i class="fa fa-table fa-fw" aria-hidden="true"></i>分类管理</a></li>
+        <li><a href="{{ url('admin/category') }}"><i class="fa fa-table fa-fw" aria-hidden="true"></i>分类管理</a></li>
         <li><a href="#"><i class="fa fa-tags fa-fw" aria-hidden="true"></i>标签管理</a></li>
-        <li><a href="../comment.html"><i class="fa fa-comments fa-fw" aria-hidden="true"></i>评论管理</a></li>
+        <li><a href="{{ url('admin/comment') }}"><i class="fa fa-comments fa-fw" aria-hidden="true"></i>评论管理</a></li>
         <li><a href="#"><i class="fa fa-link fa-fw" aria-hidden="true"></i>友链管理</a></li>
         <li><a href="../webtj.html"><i class="fa fa-area-chart fa-fw" aria-hidden="true"></i>网站统计</a></li>
-        <li><a href="../webset.html"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>系统设置</a></li>
+        <li><a href="{{ url('admin/config') }}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>系统设置</a></li>
     </ul>
 </nav>
 

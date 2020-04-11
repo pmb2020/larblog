@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function index(){
+        $data=Category::all();
+//        dd($data->toArray());
+        return view('admin.category.index',[
+            'categories' =>$data
+        ]);
+    }
     /**
      * 获取分类信息，暂时做接口用
      * @param $pid

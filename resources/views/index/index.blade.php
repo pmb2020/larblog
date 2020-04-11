@@ -3,9 +3,9 @@
 {{--@endcomponent--}}
 @extends('layouts.index')
 
-@section('title','K先生个人博客 - 分享资源和学习经验的个人博客')
-@section('keywords','K先生,K先生个人博客,个人博客' )
-@section('description','K先生个人博客，一个分享html、php源码等资源以及交流学习技术的个人博客！K先生是我的影，那些年我踩过的坑，不想让别人再踩，因为，我深知其中的苦和泪。')
+@section('title',$config['web_title'])
+@section('keywords',$config['web_keywords'] )
+@section('description',$config['web_desc'])
 
 {{--主体内容--}}
 @section('content')
@@ -53,7 +53,7 @@
                                 <h2 class="line_h2 @if($article -> cover) ellipsis1 @endif"><a target="_blank" href="{{url('/info',[$article->id])}}">{{$article->title}}</a></h2>
                                 <p class="ellipsis2 @if($article -> cover) line3 @endif">{{$article->description}}</p>
                                 <div class="text_info">
-                                    <span><i id="user_ico" class="ico"></i>K先生</span>
+                                    <span><i id="user_ico" class="ico"></i>{{$config['web_author']}}</span>
                                     <time class="md_none_line"><i id="time_ico" class="ico"></i>@if($article -> cover) {{$article->created_at->format('Y-m-d')}} @else {{$article->created_at}} @endif</time>
                                     <time class="d_none"><i id="time_ico" class="ico"></i>{{$article->created_at}}</time>
                                     <span><i id="type_ico" class="ico"></i>{{$article->category->name}}</span><span><i id="read_ico" class="ico"></i>{{$article->read_num}}</span>
@@ -63,22 +63,6 @@
                     </section>
                 @endforeach
                 {{$articles -> links()}}
-{{--                <section class="section hot_sec">--}}
-{{--                    <div class="flex_img">--}}
-{{--                        <div class="img_box">--}}
-{{--                            <img src="https://blog.yzmcms.com/uploads/thumbnail/20190916213923655.png" onerror="" alt="" title=""></div>--}}
-{{--                        <div class="r_text">--}}
-{{--                            <h2 class="ellipsis1"><a target="_blank" href="info.html">北漂之旅～新的征程</a></h2>--}}
-{{--                            <p class="ellipsis3">算算时间，现在应该是来北京的第六天了吧，当我一个人来到北京的时候，没有感觉这个城市有多么的“好”，也没有感受到电视机前北京的庄重，只是感觉一个人有些孤独罢了。其实仔细想想，我确实挺“虎”的，在只约了一个我确实挺“虎”的，在只约我确实挺“虎”的，在只约</p>--}}
-{{--                            <div class="text_info">--}}
-{{--                                <span><i id="user_ico" class="ico"></i>K先生</span>--}}
-{{--                                <time><i id="time_ico" class="ico"></i>2019-12-01</time>--}}
-{{--                                <span><i id="type_ico" class="ico"></i>爱生活</span><span><i id="read_ico" class="ico"></i>124</span>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </section>--}}
-
             </div>
         </div>
         <div class="col-md-3">

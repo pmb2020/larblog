@@ -1,9 +1,8 @@
 @extends('layouts.index')
 
-@section('title','爱分享 - K先生个人博客')
-@section('keywords','爱分享,个人博客,K先生,K先生个人博客')
-@section('description','分享html模板、js特效、php源码等资源-K先生的博客')
-
+@section('title',$seoInfo->name.' - '.$smallTitle)
+@section('keywords',$seoInfo->keywords)
+@section('description',$seoInfo->description)
 @section('style')
     <style type="text/css">
         nav{background-color: #222;}

@@ -1,8 +1,8 @@
 @extends('layouts.index')
 
-@section('title','留言板 - K先生个人博客')
-@section('keywords','留言板,K先生,个人博客,K先生个人博客')
-@section('description','有朋自远方来，来聊聊天吧-K先生个人博客')
+@section('title','留言板 - '.$smallTitle)
+@section('keywords','留言板,'.$config['web_keywords'])
+@section('description','有朋自远方来，来和七墨聊聊天吧')
 
 @section('content')
     <div class="row">

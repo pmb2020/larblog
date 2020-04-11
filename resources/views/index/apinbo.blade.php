@@ -1,12 +1,12 @@
 @extends('layouts.index')
 
-@section('title','爱拼搏 - K先生个人博客')
-@section('keywords','爱拼搏,K先生,K先生个人博客')
-@section('description','只有已经做到的才是真的，一步一个脚印，用脚印记录汗水-K先生个人博客')
+@section('title',$seoInfo->name.' - '.$smallTitle)
+@section('keywords',$seoInfo->keywords)
+@section('description',$seoInfo->description)
 
 @section('content')
     <p class="top_nav_P1" style="font-size: 14px;margin: 0 15px;">
-        您现在的位置是：<a href="/">首页</a> > <a href="/">爱拼搏</a>
+        您现在的位置是：<a href="/">首页</a> > <a href="/">{{$seoInfo->name}}</a>
         <span class="f_r music_p d_none">因为喜欢的是你，所以拼搏!</span>
     </p>
     <div style="background-color: #fff;border-radius: 5px;padding: 15px;min-height: 500px;box-shadow: 0 4px 5px 0 #d9dfe9;margin-top: 15px;">
