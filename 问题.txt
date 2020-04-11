@@ -31,6 +31,8 @@ View::share([
      'config'=>$config,
      ]);
 
+laravel6服务器填充数据的时候报错，“Target class [ConfigsTableSeeder] does not exist”
+解决方法：composer dump-autoload
 
 怎么把laravel项目上传到GitHub上
 前提：先在GitHub上创建好一个仓库
