@@ -33,11 +33,11 @@
             </div>
             <ul class="list_one ico_num" style="">
                 <p class="div_top">本站推荐</p>
-                <li><a href="http://www.gold404.cn/info.html"><p class="flex1 ellipsis1"><i></i>K先生</p><time>2018-10-25</time></a></li>
-                <li><a href="http://www.gold404.cn/info.html"><p class="flex1 ellipsis1"><i></i>php冒泡排序和快速排序</p><time>2018-10-25</time></a></li>
-                <li><a href="http://www.gold404.cn/info.html"><p class="flex1 ellipsis1"><i></i>一起来掌握PHP静态化技术</p><time>2018-10-25</time></a></li>
-                <li><a href="http://www.gold404.cn/info.html"><p class="flex1 ellipsis1"><i></i>K先生：今天不谈技术，来聊聊心情</p><time>2018-10-25</time></a></li>
-                <li><a href="http://www.gold404.cn/info.html"><p class="flex1 ellipsis1"><i></i>Bootstrap4响应式布局之栅格系统Bootstrap4响应式布局之栅格系统vsBootstrap4响应式布局之栅格系统</p><time>2018-10-25</time></a></li>
+                <li><a href="http://www.gold404.cn/info/1.html"><p class="flex1 ellipsis1"><i></i>K先生</p><time>2018-10-25</time></a></li>
+                <li><a href="http://www.gold404.cn/info/2.html"><p class="flex1 ellipsis1"><i></i>php冒泡排序和快速排序</p><time>2018-10-25</time></a></li>
+                <li><a href="http://www.gold404.cn/info/3.html"><p class="flex1 ellipsis1"><i></i>一起来掌握PHP静态化技术</p><time>2018-10-25</time></a></li>
+                <li><a href="http://www.gold404.cn/info/3.html"><p class="flex1 ellipsis1"><i></i>K先生：今天不谈技术，来聊聊心情</p><time>2018-10-25</time></a></li>
+                <li><a href="http://www.gold404.cn/info/4.html"><p class="flex1 ellipsis1"><i></i>Bootstrap4响应式布局之栅格系统Bootstrap4响应式布局之栅格系统vsBootstrap4响应式布局之栅格系统</p><time>2018-10-25</time></a></li>
             </ul>
             <div style="margin-top: 15px;">
                 <div class="new_txt md_none"><p>最新文章</p></div>
@@ -71,7 +71,7 @@
             @endcomponent
 
 {{--            日期归档组件--}}
-            @component('index.component.date')
+            @component('index.component.date',['dateGuidangs'=>$dateGuidangs])
             @endcomponent
 {{--            热门文章组件--}}
             @component('index.component.hotArticle')

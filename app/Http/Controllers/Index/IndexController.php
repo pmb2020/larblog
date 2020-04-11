@@ -19,8 +19,11 @@ class IndexController extends Controller
                 $v->category->name=$name->name;
             }
         }
+        $art=new Article();
+        $dateGuidang=$art->dateGuidang();
         return view('index.index',[
-            'articles' => $articles
+            'articles' => $articles,
+            'dateGuidangs'=>$dateGuidang
         ]);
     }
     public function ashare(){

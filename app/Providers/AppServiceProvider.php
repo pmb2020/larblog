@@ -35,10 +35,12 @@ class AppServiceProvider extends ServiceProvider
 
         $article=new Article();
         $hotArticles=$article->getHot();
+        $dateGuidang=$article->dateGuidang();
         View::share([
             'config'=>$config??'',
             'smallTitle'=>Str::before($config['web_title']??'','-'),
-            'hotArticles'=>$hotArticles??''
+            'hotArticles'=>$hotArticles??'',
+//            'dateGuidang'=>$dateGuidang??''
         ]);
     }
 }
