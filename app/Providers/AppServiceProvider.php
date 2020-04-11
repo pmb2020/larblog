@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Article;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -31,9 +32,13 @@ class AppServiceProvider extends ServiceProvider
         foreach ($configs as $v){
             $config[$v->name]=$v->value;
         }
+
+        $article=new Article();
+        $hotArticles=$article->getHot();
         View::share([
             'config'=>$config??'',
-            'smallTitle'=>Str::before($config['web_title']??'','-')
+            'smallTitle'=>Str::before($config['web_title']??'','-'),
+            'hotArticles'=>$hotArticles??''
         ]);
     }
 }
