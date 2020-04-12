@@ -2,7 +2,7 @@
 
 @section('title','留言板 - '.$smallTitle)
 @section('keywords','留言板,'.$config['web_keywords'])
-@section('description','有朋自远方来，来和七墨聊聊天吧')
+@section('description','有朋自远方来，来和K先生聊聊天吧')
 
 @section('content')
     <div class="row">

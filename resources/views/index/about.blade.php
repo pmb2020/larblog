@@ -1,7 +1,7 @@
 @extends('layouts.index')
 @section('title','关于我 - '.$smallTitle)
-@section('keywords','关于我,七墨是谁,'.$config['web_keywords'])
-@section('description','七墨是谁？七墨是一个掌握网站、小程序、webapp等开发技术的程序员，当然，也是一个精致boy')
+@section('keywords','关于我,K先生是谁,'.$config['web_keywords'])
+@section('description','K先生是谁？K先生是一个掌握网站、小程序、webapp等开发技术的程序员，当然，也是一个精致boy')
 
 @section('content')
     <div class="row">
