@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\MOdels\Recommend;
+use App\Models\Recommend;
 class RecommendsTableSeeder extends Seeder
 {
     /**

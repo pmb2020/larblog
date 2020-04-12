@@ -4,7 +4,7 @@ namespace App\Http\Controllers\index;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
-use App\MOdels\Category;
+use App\Models\Category;
 use App\Models\Recommend;
 use Illuminate\Http\Request;
 
