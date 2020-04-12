@@ -10,18 +10,20 @@
     <link rel="stylesheet" type="text/css" href="{{asset('static/index/css/base.css')}}" />
     @section('style')
     @show
+{{--    第三方统计代码--}}
+    {!! $config['web_code']??'' !!}
 </head>
 <body>
 {{--头部--}}
 <header>
     <div class="container">
-        <h2 class="d_none"><img alt="K先生个人博客" title="K先生个人博客" src="{{asset('static/index/images/logo3.png')}}" height="90px"></h2>
+        <h2 class="d_none"><img title="K先生个人博客" src="{{asset('static/index/images/logo3.png')}}" height="90px"></h2>
         <!-- 移动端导航 -->
         <div class="md_none" style="">
             <div class="menu_div" style="">
                 <button id="menu_btn"><i class="fa fa-bars" aria-hidden="true"></i></button>
                 <div style="text-align: center;">
-                    <img alt="K先生个人博客" src="{{asset('static/index/images/mlogo.png')}}" style="width: 150px">
+                    <img src="{{asset('static/index/images/mlogo.png')}}" style="width: 150px">
                 </div>
                 <button id="search_btn"><i class="fa fa-search" aria-hidden="true"></i></button>
             </div>

@@ -1,6 +1,3 @@
-{{--@component('index.component.userInfo')--}}
-{{--    <strong>Whoops!</strong> Something went wrong!--}}
-{{--@endcomponent--}}
 @extends('layouts.index')
 
 @section('title',$config['web_title'])
