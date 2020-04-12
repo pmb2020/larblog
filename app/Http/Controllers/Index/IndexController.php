@@ -5,6 +5,7 @@ namespace App\Http\Controllers\index;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\MOdels\Category;
+use App\Models\Recommend;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -23,9 +24,11 @@ class IndexController extends Controller
         $dateGuidang=$art->dateGuidang();
         return view('index.index',[
             'articles' => $articles,
-            'dateGuidangs'=>$dateGuidang
+            'dateGuidangs'=>$dateGuidang,
+            'recommends0'=>Recommend::getRecommend(0)
         ]);
     }
+
     public function ashare(){
 //        $articles=$this->getArticle(2,2);
         $articles=Article::join('categories','articles.category_id','=','categories.id')
