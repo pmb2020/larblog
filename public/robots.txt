@@ -1,2 +1,5 @@
+# robots.txt generated at http://www.aizhan.com
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Sitemap:http://www.gold404.cn/sitemap.xml
