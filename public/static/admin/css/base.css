@@ -490,7 +490,7 @@ ul:after {
 	-o-transition: width 0.8s;
 	/* Opera */
 }
-
+.nav_ul .active{color: #f96332}
 /* .nav_ul li{padding: 12px;} */
 .main {
 	position: fixed;

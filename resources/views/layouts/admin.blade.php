@@ -41,15 +41,15 @@
 {{--侧边导航栏--}}
 <nav class="nav mw0">
     <ul class="nav_ul">
-        <li><a href="{{ url('admin/index') }}"><i class="fa fa-home fa-fw" aria-hidden="true"></i>后台首页</a></li>
-        <li><a href="{{ url('admin/article/index') }}"><i class="fa fa-book fa-fw" aria-hidden="true"></i>文章管理</a></li>
-        <li><a href="{{ url('admin/article/create') }}"><i class="fa fa-table fa-fw" aria-hidden="true"></i>发表文章</a></li>
-        <li><a href="{{ url('admin/category') }}"><i class="fa fa-table fa-fw" aria-hidden="true"></i>分类管理</a></li>
-        <li><a href="#"><i class="fa fa-tags fa-fw" aria-hidden="true"></i>标签管理</a></li>
-        <li><a href="{{ url('admin/comment') }}"><i class="fa fa-comments fa-fw" aria-hidden="true"></i>评论管理</a></li>
-        <li><a href="#"><i class="fa fa-link fa-fw" aria-hidden="true"></i>友链管理</a></li>
-        <li><a href="../webtj.html"><i class="fa fa-area-chart fa-fw" aria-hidden="true"></i>网站统计</a></li>
-        <li><a href="{{ url('admin/config') }}"><i class="fa fa-cog fa-fw" aria-hidden="true"></i>系统设置</a></li>
+        <li><a class="{{Request::getPathinfo()=='/admin/index'?'active':''}}" href="{{ url('admin/index') }}"><i class="fa fa-home fa-fw"></i>后台首页</a></li>
+        <li><a class="{{Request::getPathinfo()=='/admin/article/index'?'active':''}}" href="{{ url('admin/article/index') }}"><i class="fa fa-book fa-fw"></i>文章管理</a></li>
+        <li><a class="{{Request::getPathinfo()=='/admin/article/create'?'active':''}}" href="{{ url('admin/article/create') }}"><i class="fa fa-table fa-fw"></i>发表文章</a></li>
+        <li><a class="{{Request::getPathinfo()=='/admin/category'?'active':''}}" href="{{ url('admin/category') }}"><i class="fa fa-table fa-fw"></i>分类管理</a></li>
+        <li><a href="#"><i class="fa fa-tags fa-fw"></i>标签管理</a></li>
+        <li><a class="{{Request::getPathinfo()=='/admin/comment'?'active':''}}" href="{{ url('admin/comment') }}"><i class="fa fa-comments fa-fw"></i>评论管理</a></li>
+        <li><a  href="#"><i class="fa fa-link fa-fw"></i>友链管理</a></li>
+        <li><a  href="#"><i class="fa fa-area-chart fa-fw"></i>网站统计</a></li>
+        <li><a class="{{Request::getPathinfo()=='/admin/config'?'active':''}}" href="{{ url('admin/config') }}"><i class="fa fa-cog fa-fw"></i>系统设置</a></li>
     </ul>
 </nav>
 
