@@ -25,7 +25,7 @@
         <div class="type_item">
             <a @if($nowId==0) style="color: #41c9a6;" @endif href="{{url('/ashare')}}">全部</a>
             @foreach($categorys as $category)
-                <a @if($category->id==$nowId) style="color: #41c9a6;" @endif href="{{ url('/ashare',[$category->id]) }}">{{$category->name}}</a>
+                <a @if($category->id==$nowId) style="color: #41c9a6;" @endif href="{{ url($category->slug) }}">{{$category->name??''}}</a>
             @endforeach
         </div>
         @foreach($articles as $article)

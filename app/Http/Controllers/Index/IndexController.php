@@ -31,8 +31,8 @@ class IndexController extends Controller
 
     public function ashare(){
 //        $articles=$this->getArticle(2,2);
-        $articles=Article::join('categories','articles.category_id','=','categories.id')
-        ->where('categories.pid','=',2)->orderBy('articles.id','desc')->paginate(16);
+        $articles=Article::leftJoin('categories','articles.category_id','=','categories.id')
+        ->where('categories.pid','=',2)->select('articles.id','articles.title','cover','zan_num')->orderBy('articles.id','desc')->paginate(16);
         $categorys=Category::where('pid',2)->get();
 //        dd($articles->toArray());
         return view('index.ashare',[
@@ -42,15 +42,21 @@ class IndexController extends Controller
             'nowId' =>0 //做css标识用
         ]);
     }
+
+    /**
+     * @param $id值为 html/js/other
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function ashareType($id){
-        $articles=$this->getArticle($id,16);
+        $cid=Category::select('id')->where('slug','/ashare/'.$id)->first();
+        $articles=$this->getArticle($cid->id,16);
         $categorys=Category::where('pid',2)->get();
 //        dd($articles->toArray());
         return view('index.ashare',[
             'articles' =>$articles,
             'categorys'=>$categorys,
-            'seoInfo'=>$this->getSeoInfo($id),
-            'nowId' =>$id //做css标识用
+            'seoInfo'=>$this->getSeoInfo($cid->id),
+            'nowId' =>$cid->id //做css标识用
         ]);
     }
     public function ajishu(){
