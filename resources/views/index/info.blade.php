@@ -15,7 +15,7 @@
                 <p>当前位置：<a href="/">首页</a> > <a href="{{url($infoData->category->slug)}}">{{$infoData -> category-> name}}</a> > <a href="#">正文</a></p>
             </div>
             <div class="content" style="margin-top: 0;padding-top: 15px;">
-                <h2 class="line_h2">{{$infoData->title}}</h2>
+                <h1 class="line_h2">{{$infoData->title}}</h1>
                 <div class="user_info">
                     <span><i id="user_ico" class="ico"></i>K先生</span>
                     <time><i id="time_ico" class="ico"></i>{{$infoData -> created_at}}</time>

@@ -6,6 +6,7 @@
     <title>@yield('title')</title>
     <meta name="Keywords" content="@yield('keywords')">
     <meta name="Description" content="@yield('description')">
+    <meta name="author" content="{{$config['web_author']}}">
     <link rel="stylesheet" type="text/css" href="{{asset('static/index/css/swiper.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('static/index/css/base.css')}}" />
     @section('style')

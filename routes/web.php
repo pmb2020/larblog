@@ -67,6 +67,7 @@ Route::namespace('Index')->group(function (){
 });
 
 //重定向
+Route::redirect('/ashare.html', '/ashare', 301);
 Route::redirect('/apinbo.html', '/apinbo', 301);
 Route::redirect('/ajishu.html', '/ajishu', 301);
 Route::redirect('/alife.html', '/alife', 301);
