@@ -14,7 +14,7 @@ class ArticleController extends Controller
     //文章列表
     public function index()
     {
-        $articles= Article::orderBy('id','desc')->paginate(5);
+        $articles= Article::orderBy('id','desc')->paginate(10);
         return view('admin.article.index',[
             'articles' => $articles
         ]);

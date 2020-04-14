@@ -40,7 +40,7 @@
                                 <div class="list_info_left">
                                     <span>原创</span>
                                     <span>爱生活</span>
-                                    <span>{{$article -> updated_at}}</span>
+                                    <span>{{$article -> created_at}}</span>
                                     <span><i class="fa fa-eye" aria-hidden="true"></i>{{$article -> read_num}}</span>
                                     <span><i class="fa fa-commenting-o" aria-hidden="true"></i>{{$article -> commnet_num}}</span>
                                 </div>
