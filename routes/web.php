@@ -66,3 +66,11 @@ Route::namespace('Index')->group(function (){
     Route::get('info/{id}','InfoController@index');
 });
 
+//重定向
+Route::redirect('/apinbo.html', '/apinbo', 301);
+Route::redirect('/ajishu.html', '/ajishu', 301);
+Route::redirect('/alife.html', '/alife', 301);
+Route::redirect('/gbook.html', '/gbook', 301);
+Route::get('/about.html',function (){
+    return redirect('/about', 301);
+});
