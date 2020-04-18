@@ -77,7 +77,6 @@ $(document).ready(function() {
                         email:getCookie('email'),
                         content:replaytext,
                         replay_id:''
-
                     },
                     success:function (res) {
                         console.log(res);
