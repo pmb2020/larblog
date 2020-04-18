@@ -21,12 +21,4 @@ class CommentController extends Controller
         return 'create';
     }
 
-    public function create(Request $request){
-        if ($request->isMethod('POST')){
-            $data=$request->all();
-            $res=Comment::addComment($data);
-            return $res;
-        }
-        return 'create';
-    }
 }
