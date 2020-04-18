@@ -87,7 +87,7 @@ $(document).ready(function() {
 			// console.log(data);
 			// console.log(data[0]);
 			// createComList(data);
-		
+
 		},error:function (data) {
 			console.log('请求失败');
 		}

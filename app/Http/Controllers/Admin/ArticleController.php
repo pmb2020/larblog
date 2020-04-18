@@ -41,7 +41,6 @@ class ArticleController extends Controller
                 return redirect()->back();
             }
         }
-
         $Categorys=Category::where('pid',0)->select('id','name')->get();
 //        dd($Categorys);
         return view('admin.article.create',[

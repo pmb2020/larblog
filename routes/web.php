@@ -64,6 +64,9 @@ Route::namespace('Index')->group(function (){
     Route::get('gbook','IndexController@gbook');
     Route::get('about','IndexController@about');
     Route::get('info/{id}','InfoController@index');
+
+    Route::get('comment','CommentController@index');
+    Route::any('comment/add','CommentController@create');
 });
 
 //重定向

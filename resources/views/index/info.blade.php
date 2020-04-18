@@ -5,6 +5,7 @@
 @section('description',$infoData -> description)
 
 @section('style')
+    <meta name="_token" content="{{ csrf_token() }}"/>
     <link rel="stylesheet" href="{{asset('static/index/css/monokai-sublime.css')}}">
     <link rel="stylesheet" href="{{asset('static/index/lib/comment/css/comment.css')}}">
 @endsection
@@ -73,7 +74,7 @@
                                     <div class="com_input_div">
                                         <label style="">邮箱：</label>
                                         <input class="com_input" type="email" name="email">
-                                        <span class="com_tip" style=""><span style="color: red;">*</span> 必填项</span>
+                                        <span class="com_tip">可选</span>
                                     </div>
                                     <div class="com_input_div" style="">
                                         <label style="">网址：</label>
@@ -84,12 +85,12 @@
                                 <div style="flex: 0 0 50%;max-width:50%;">
                                     <div class="com_card" style="display: none;">
                                         <div class="com_card_left" style="">
-                                            <img class="round" width="65" height="65" avatar="轻微的风">
+                                            <img id="avatar"  class="round" width="65" height="65" avatar="">
                                         </div>
                                         <div class="com_card_right" style="">
-                                            <p>name：<span id="card_name"></span></p>
-                                            <p style="white-space: nowrap;">Email：<span id="card_email"></span></p>
-                                            <p>网址：<span id="card_href"></span></p>
+                                            <p>name：<span id="username">轻微的风</span></p>
+                                            <p style="white-space: nowrap;">Email： <span id="email">pmb2020@163.com</span></p>
+                                            <p>网址：<span id="href">无</span></p>
                                         </div>
                                     </div>
                                     <div class="create_com" style="height: 100%;width: 100%;">
@@ -107,13 +108,41 @@
                         <div class="com_bom">
                             <h5 class="com_h5">评论列表</h5>
                             <ul class="com_ul">
-                                <p>暂时还没有评论哦！</p>
+                                @if(!$comments)<p>暂时还没有评论哦！</p>@endif
+                                @foreach($comments as $comment)
+                                    <li>
+                                        <img class="round" width="50" height="50" avatar="{{$comment['username']}}">
+                                        <div class="com_right" style="">
+                                            <p class="com_info_top"><a id="name1" href="{{$comment['href'] | '#'}}">{{$comment['username']}}</a><span style="float: right;">顶（{{$comment['zan_num']}}）</span></p>
+                                            <p class="com_info_center" style="">{{$comment['content']}}</p>
+                                            <div class="com_ul_bom">
+                                                <span>{{$comment['created_at']}}</span>
+                                                <span id="replay"><a href="javascript:void(0)">回复</a></span>
+                                            </div>
+                                            @if($comment['replaydata'])
+                                            <ul class="com_two">
+                                                @foreach($comment['replaydata'] as $replayData)
+                                                    <li>
+                                                        <div class="com_two_div">
+                                                            <p class="mb5"><a id="name2" href="{{$replayData['href'] | '#'}}">{{$replayData['username']}}</a> 回复 <a href="#">{{'@'.$replayData['replay_name']}}</a>：<span>{{$replayData['content']}}</span></p>
+                                                            <div class="com_ul_bom">
+                                                                <span>{{$replayData['created_at']}}</span>
+                                                                <span id="replay">回复</span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                            @endif
+
+                                        </div>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="col-md-3">
             <aside style="margin-top: 0px;">
@@ -125,7 +154,6 @@
                 </div>
                 <!-- <cite style="font-size: 14px;">我喜欢的歌没有火就像我喜欢的人从未喜欢过我</cite> -->
             </aside>
-
             @component('index.component.hotArticle')
             @endcomponent
             <aside class="d_none" style="margin-top: 15px;">
@@ -140,11 +168,12 @@
                     <li><a href="http://www.gold404.cn/info/1.html">>K先生<span>10-25</span></a></li>
                 </ul>
             </aside>
-
         </div>
     </div>
 @endsection
 @section('myjs')
+    <script src="{{asset('static/index/js/headimg.js')}}"></script>
+    <script src="{{asset('static/index/js/comment.js')}}"></script>
     <script src="{{asset('static/index/js/highlight.pack.js')}}"></script>
     <script>
         hljs.initHighlightingOnLoad();
