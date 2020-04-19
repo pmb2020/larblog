@@ -414,12 +414,13 @@ width: 14px;height: 14px;margin-right: 5px;vertical-align: middle;position: rela
 .user_info{font-size: 12px;color: #888;}
 .user_info span{margin-right: 20px;}
 .user_info time{margin-right: 20px;}
-.blog_text{margin-top: 20px;color: #444;min-height: 500px;}
+.blog_text{margin-top: 20px;color: #555;min-height: 500px;}
 .jiami_p{color: #E53333;margin: 10px auto;width: 200px;text-align: center;padding: 20px;background-color: #efefef;font-size: 18px;border-radius: 3px}
-.blog_text h3{background-color: #eee;height: 32px;margin-bottom: 15px}
+.blog_text h2{font-size: 20px}
+.blog_text h3{background-color: #eee;margin-bottom: 15px;padding: 5px;font-size: 18px;font-weight: 400}
 .blog_text h3 span{background-color:#4ec585;color: #fff;padding:0 10px;line-height: 32px;font-size: 15px;display: inline-block;font-weight: normal;}
 .blog_text a{color: #3690cf;margin: 0 5px;word-wrap: break-word; white-space: normal;}
-.blog_text p{margin-bottom: 20px;line-height: 24px;}
+.blog_text p{margin: 20px auto;line-height: 24px;}
 .blog_text img{max-width: 100%;height: auto;}
 .banquan{background: none repeat scroll 0 0 #e7f4ff;border:1px solid #c9ddfa;padding: 12px 15px;font-size: 14px}
 .banquan a{color: #00a67c}

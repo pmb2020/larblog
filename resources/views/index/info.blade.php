@@ -8,6 +8,36 @@
     <meta name="_token" content="{{ csrf_token() }}"/>
     <link rel="stylesheet" href="{{asset('static/index/css/monokai-sublime.css')}}">
     <link rel="stylesheet" href="{{asset('static/index/lib/comment/css/comment.css')}}">
+    <style>
+        code li br{display: none}
+        .blog_text pre{position: relative;padding-top: 32px}
+        .blog_text pre:before{
+            display: block;
+            content: ' ';
+            height: 32px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #f6f6f6;
+            padding: 0 10px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+        .blog_text pre:after{
+            content: " ";
+            position: absolute;
+            border-radius: 50%;
+            background: #fc625d;
+            width: 10px;
+            height: 10px;
+            top: 0;
+            left: 15px;
+            margin-top: 11px;
+            -webkit-box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+            box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="row">
