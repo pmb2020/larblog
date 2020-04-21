@@ -143,7 +143,7 @@
                                     <li>
                                         <img class="round" width="50" height="50" avatar="{{$comment['username']}}">
                                         <div class="com_right" style="">
-                                            <p class="com_info_top"><a id="name1" href="{{$comment['href'] | '#'}}">{{$comment['username']}}</a><span style="float: right;">顶（{{$comment['zan_num']}}）</span></p>
+                                            <p class="com_info_top"><a id="name1" target="_blank" href="{{$comment['href'] | '#'}}">{{$comment['username']}}</a><span style="float: right;">顶（{{$comment['zan_num']}}）</span></p>
                                             <p class="com_info_center" style="">{{$comment['content']}}</p>
                                             <div class="com_ul_bom">
                                                 <span>{{$comment['created_at']}}</span>
@@ -154,7 +154,7 @@
                                                 @foreach($comment['replaydata'] as $replayData)
                                                     <li>
                                                         <div class="com_two_div">
-                                                            <p class="mb5"><a id="name2" href="{{$replayData['href'] | '#'}}">{{$replayData['username']}}</a> 回复 <a href="#">{{'@'.$replayData['replay_name']}}</a>：<span>{{$replayData['content']}}</span></p>
+                                                            <p class="mb5"><a id="name2" target="_blank" href="{{$replayData['href'] | '#'}}">{{$replayData['username']}}</a> 回复 <a href="#">{{'@'.$replayData['replay_name']}}</a>：<span>{{$replayData['content']}}</span></p>
                                                             <div class="com_ul_bom">
                                                                 <span>{{$replayData['created_at']}}</span>
                                                                 <span id="replay">回复</span>

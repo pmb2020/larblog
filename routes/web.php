@@ -78,3 +78,7 @@ Route::redirect('/gbook.html', '/gbook', 301);
 Route::get('/about.html',function (){
     return redirect('/about', 301);
 });
+
+//Route::get('/mail','Index\CommentController@mail');
+
+
