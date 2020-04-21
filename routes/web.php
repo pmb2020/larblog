@@ -79,6 +79,6 @@ Route::get('/about.html',function (){
     return redirect('/about', 301);
 });
 
-//Route::get('/mail','Index\CommentController@mail');
+Route::get('/mail','Index\CommentController@mail');
 
 
