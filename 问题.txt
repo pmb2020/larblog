@@ -73,6 +73,13 @@ laravel6服务器填充数据的时候报错，“Target class [ConfigsTableSeed
     执行了composer update命令
     test
 
+    composer 报proc_open(): fork failed errors 错误解决方法
+    查看内存free -m
+    开启swap：
+    /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
+    /sbin/mkswap /var/swap.1
+    /sbin/swapon /var/swap.1
+
 
 
 

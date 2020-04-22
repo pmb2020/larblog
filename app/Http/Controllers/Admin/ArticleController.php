@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
-use App\MOdels\Category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Psy\Util\Str;
 
