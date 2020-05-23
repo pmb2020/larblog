@@ -39,7 +39,7 @@
                         </div>
                     </section>
                 @endforeach
-                    {{$articles -> links()}}
+                    {{$articles->appends(['keyword' => $keyword]) -> links()}}
                 @endif
             </div>
         </div>

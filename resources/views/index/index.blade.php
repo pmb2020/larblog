@@ -77,8 +77,9 @@
             <aside class="d_none" style="margin-top: 15px;min-height: 120px;">
                 <p class="div_top">友情链接</p>
                 <ul class="link_ul">
-                    <li><a href="http://daohang.lusongsong.com/" target="_blank" title="博客大全">博客大全</a></li>
-                    <li><a href="http://www.duola.vip/" target="_blank" title="哆啦日记">哆啦日记</a></li>
+                    <li><a href="http://daohang.lusongsong.com" target="_blank" title="博客大全">博客大全</a></li>
+                    <li><a href="http://www.duola.vip" target="_blank" title="哆啦日记">哆啦日记</a></li>
+                    <li><a href="https://www.myong.top" target="_blank">My.Yong博客</a></li>
                 </ul>
             </aside>
         </div>
