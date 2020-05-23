@@ -18,7 +18,17 @@
 {{--头部--}}
 <header>
     <div class="container">
-        <h2 class="d_none"><img alt="K先生个人博客" title="K先生个人博客" src="{{asset('static/index/images/logo3.png')}}" height="90px"></h2>
+        <div class="flex d_none" style="justify-content: space-between;align-items: center">
+            <h2>
+                <img alt="K先生个人博客" title="K先生个人博客" src="{{asset('static/index/images/logo3.png')}}" height="90px">
+            </h2>
+            <form class="search_form" action="{{asset('search')}}" method="GET">
+                <div class="flex search" style="">
+                    <input style="flex: 1" type="text" placeholder="请输入关键词" required name="keyword" value="{{$keyword??''}}">
+                    <button type="submit">搜索</button>
+                </div>
+            </form>
+        </div>
         <!-- 移动端导航 -->
         <div class="md_none" style="">
             <div class="menu_div" style="">

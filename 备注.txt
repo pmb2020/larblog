@@ -16,6 +16,8 @@
 
 4、了解一下控制器
    使用命令创建一个IndexController控制器：php artisan make:controller IndexController
+   php artisan make:controller SearchController
+   php artisan make:controller SearchController
     在控制器中写test方法：
     public function test(){
         return '我是IndexController控制器下的test方法哦';

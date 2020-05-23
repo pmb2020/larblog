@@ -408,7 +408,7 @@ width: 14px;height: 14px;margin-right: 5px;vertical-align: middle;position: rela
 .music_p:after{content: '\201D';
     font: 50px Arial;
     line-height: 0;
-    margin-left: 8px;
+    margin-left: 4px;
     vertical-align: -24px;
     color: #3690cf;}
 .user_info{font-size: 12px;color: #888;}
@@ -507,4 +507,28 @@ width: 14px;height: 14px;margin-right: 5px;vertical-align: middle;position: rela
 }
 
 .add316{min-height: 600px;background-color: #fff;box-shadow: 0 4px 5px 0 #d9dfe9;border-radius: 5px;margin-top: 15px;}
+/*搜索框*/
+.search_form {
+    position:relative;
+    width:300px;
+}
+.search input{
+    /*width: 100%;*/
+    background: transparent;
+    outline: none;
+    padding: 12px;
+    border:2px solid #00a67c;
+    border-radius:5px 0 0 5px;
+}
+.search button{
+    background:#00a67c;
+    border-radius:0 5px 5px 0;
+    width:60px;
+    color: #F9F0DA;
+    font-size:13px;
+    cursor:pointer;
+    outline: none;
+    border: none;
+}
+.searchlist_top{justify-content: space-between;background-color: #fff;padding: 10px 15px;font-size: 14px}
 
