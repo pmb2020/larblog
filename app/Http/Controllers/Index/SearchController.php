@@ -9,12 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
-    //
+    //博客文章搜索
     public function index(Request $request){
         $keyword=$request->input('keyword');
         if ($keyword){
         $keywordSql = '%'.implode('%',preg_split("//u", $keyword, -1, PREG_SPLIT_NO_EMPTY)).'%';
-//        dd($keywordSql);
 //        $results=DB::table('articles')->where('title','like',$keywords)->get();
         $results=Article::where('title','like',$keywordSql)->with('Category:id,name')->orderBy('id','desc')->paginate(10);
         }
