@@ -100,7 +100,7 @@ $(document).ready(function() {
 		var email = $("input[ name='email' ] ");
 		var href = $("input[ name='href' ] ");
 		var title = $("textarea[ name='title' ] ").val();
-        href = href.val() || '无';
+        href = href.val() || '#';
 		email = email.val() || '无';
 		if (!username) {
 			alert('请先填写昵称哦！');
