@@ -49,6 +49,7 @@ class Comment extends Model
                 foreach ($v->replayData as $vv){
                     $vv->time=changeDate($vv->time);
                 }
+                $v->replayData=array_reverse($v->replayData);
             }
         }
         return array_reverse($results);
