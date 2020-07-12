@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Comment extends Model
 {
-    protected $fillable=['username','email','article_id','href','content','ip'];
+    protected $fillable=['username','email','article_id','replay_id','href','content','ip'];
 
 //    添加评论
     static function addComment($data){
@@ -21,23 +22,36 @@ class Comment extends Model
         $datas=Comment::where('comments.article_id',$article_id)->leftJoin('comments as replay','replay.id','=','comments.replay_id')
             ->select('comments.*','replay.username as replay_name')
             ->get()->toArray();
-        $newDatas=$datas;
-        foreach ($datas as $k=>$v){
-            $newDatas[$k]['created_at']=changeDate($v['created_at']);
-            if ($v['replay_id']!=0){
-                //二级回复处理，把对应的回复接到一级回复
-                $key=found_Key($newDatas,'id',$v['replay_id']);
-                $newDatas[$key]['replaydata'][]=$newDatas[$k];
-                unset($newDatas[$k]);
-            }else{$newDatas[$k]['replaydata']=array();}
-        }
-//        逆序
-        foreach ($newDatas as &$v){
-            if (count($v['replaydata'])>1){
-                $v['replaydata']=array_reverse($v['replaydata']);
+        $results=DB::select('SELECT com.id,com.href,com.username,com.content,com.created_at time,com.zan_num,GROUP_CONCAT(CONCAT(\'{"username":"\',rep.username,\'","replay_name":"\',com.username,\'","content":"\',rep.content,\'","time":"\',rep.created_at,\'","zan_num":"\',rep.zan_num,\'"}\'))AS replayData FROM ml_comments com LEFT  JOIN ml_comments rep ON com.id=rep.replay_id WHERE com.replay_id=0 AND com.article_id='
+            .$article_id.' GROUP BY com.id');
+
+//        foreach ($datas as $k=>$v){
+//            $newDatas[$k]['created_at']=changeDate($v['created_at']);
+//            if ($v['replay_id']!=0){
+//                //二级回复处理，把对应的回复接到一级回复
+//                $key=found_Key($newDatas,'id',$v['replay_id']);
+////                echo 'key:'.$key;
+//                $newDatas[$key+1]['replaydata'][]=$datas[$k];
+//                unset($newDatas[$k]);
+//            }else{$newDatas[$k]['replaydata']=array();}
+//        }
+////        逆序
+//        foreach ($newDatas as &$v){
+//            if (count($v['replaydata'])>1){
+//                $v['replaydata']=array_reverse($v['replaydata']);
+//            }
+//        }
+//        $results[2]->replayData=json_decode($results[2]->replayData,true);
+        foreach ($results as $v){
+            $v->replayData=json_decode('['.$v->replayData.']');
+            $v->time=changeDate($v->time);
+            if ($v->replayData){
+                foreach ($v->replayData as $vv){
+                    $vv->time=changeDate($vv->time);
+                }
             }
         }
-        return array_reverse($newDatas);
+        return array_reverse($results);
     }
 
 }

@@ -38,7 +38,7 @@ class InfoController extends Controller
             $v['replayData']=json_decode($temp,true);
         }
 
-        return view('index.info',[
+        return view('index.info1',[
             'infoData' => $infoData,
             'prev_article'=>$prev_article,
             'next_article'=>$next_article,

@@ -7,7 +7,7 @@
 @section('style')
     <meta name="_token" content="{{ csrf_token() }}"/>
     <link rel="stylesheet" href="{{asset('static/index/css/monokai-sublime.css')}}">
-    <link rel="stylesheet" href="{{asset('static/index/lib/comment/css/comment.css')}}">
+    <link rel="stylesheet" href="{{asset('static/index/css/comment.css')}}">
     <style>
         code li br{display: none}
         .blog_text pre{position: relative;padding-top: 32px}
@@ -59,11 +59,8 @@
                 <div class="banquan" style="">
                     <p style="margin-bottom: 5px"><b>作者</b>：<a href="http://www.gold404.cn/about" style="margin-right: 15px">K先生</a><b>本文地址</b>：<a
                             href="#" title="可以平凡，但不能自暴自弃">http://www.gold404.cn/</a></p>
-                    <p><b>版权声明</b>：本文为原创文章，版权归 <a href="http://www.gold404.cn/">K先生个人博客</a> 所有，欢迎分享本文，转载请保留出处，谢谢！</p>
+                    <p><b>版权声明</b>：本文为原创文章，版权归 <a href="http://www.gold404.cn">K先生个人博客</a> 所有，欢迎分享本文，转载请保留出处，谢谢！</p>
                 </div>
-{{--               <div class="" style="text-align: center;margin: 10px;">--}}
-{{--                    <button type="button" style="background-color: red;border: none;padding: 5px 10px;color: #fff;">👍赞一下（57）</button>--}}
-{{--                </div> --}}
                 <div class="next_div">
                     <p>上一篇：
                         @if($prev_article)
@@ -91,82 +88,78 @@
                 <!-- <p class="div_top">文章评论</p> -->
                 <!-- <p style="color: #888;">暂无评论</p> -->
                 <div class="container">
-                    <div class="comment_div">
-                        <h5 class="com_h5" style="font-size: 16px;">文章评论</h5>
+                    <div class="comment_body">
+                        <input type="hidden" name="article_id" value="{{$infoData->id}}" />
+                        <h4 class="com_h4">文章评论</h4>
                         <form id="form0" action="#" method="post" onsubmit="return false">
-                            <div class="com_top" style="display: flex;flex-wrap: wrap;">
-                                <div style="flex: 0 0 50%;max-width:50%">
+                            <div class="input-box">
+                                <div style="margin-right: 15px;">
                                     <div class="com_input_div" style="">
-                                        <label style="">昵称：</label>
-                                        <input class="com_input" type="text" name="username" value="">
-                                        <span class="com_tip" style=""><span style="color: red;">*</span> 必填项</span>
+                                        <label>昵称：</label>
+                                        <input type="text" name="username" value="" />
+                                        <span><span style="color: red;">*</span> 必填</span>
                                     </div>
                                     <div class="com_input_div">
-                                        <label style="">邮箱：</label>
-                                        <input class="com_input" type="email" name="email">
-                                        <span class="com_tip">可选</span>
+                                        <label>邮箱：</label>
+                                        <input type="text" name="email" value="" placeholder="仅用来接收回复通知" />
+                                        <span>可选</span>
                                     </div>
-                                    <div class="com_input_div" style="">
-                                        <label style="">网址：</label>
-                                        <input class="com_input" type="text" name="href" placeholder="http://或https://开头哦">
-                                        <span class="com_tip">可选</span>
+                                    <div class="com_input_div">
+                                        <label>网址：</label>
+                                        <input type="text" name="href" value="" />
+                                        <span>可选</span>
                                     </div>
                                 </div>
-                                <div style="flex: 0 0 50%;max-width:50%;">
+                                <div style="position: relative;">
+                                    <button class="create_btn" type="button" onclick="createCard(this)">生成本站通行证</button>
+                                </div>
+
+                                <div class="com_card-box">
                                     <div class="com_card" style="display: none;">
-                                        <div class="com_card_left" style="">
-                                            <img id="avatar"  class="round" width="65" height="65" avatar="">
-                                        </div>
-                                        <div class="com_card_right" style="">
-                                            <p>name：<span id="username">轻微的风</span></p>
-                                            <p style="white-space: nowrap;">Email： <span id="email">pmb2020@163.com</span></p>
-                                            <p>网址：<span id="href">无</span></p>
-                                        </div>
-                                    </div>
-                                    <div class="create_com" style="height: 100%;width: 100%;">
-                                        <button id="create_btn" class="com_btn" style="">生成名片</button>
-                                    </div>
-                                </div>
-                                <div style="flex: 0 0 100%;margin-top: 15px;">
-                                    <div class="com_area_div" style="">
-                                        <textarea name="title" placeholder="写点什么..."></textarea>
-                                        <input onclick="comment()" class="com_btn" type="submit" name="" value="发表评论" />
+                                        <img style="" class="round" size="60" avatar="K先生" alt="K先生">
+                                        <h4>欢迎您，K先生</h4>
                                     </div>
                                 </div>
                             </div>
+                            <div class="com_area_div">
+                                <textarea name="content" required placeholder="来说几句吧......"></textarea>
+                                <div class="area_bom">
+                                    <img src="{{asset('static/index/images/emoji.png')}}">
+                                    <input class="com_btn" type="button" onclick="comment()" value="发表评论" />
+                                </div>
+                            </div>
                         </form>
-                        <div class="com_bom">
-                            <h5 class="com_h5">评论列表</h5>
+                        <div class="com_list">
+                            <h4 class="com_h4">评论列表</h4>
                             <ul class="com_ul">
                                 @if(!$comments)<p>暂时还没有评论哦！</p>@endif
                                 @foreach($comments as $comment)
-                                    <li>
-                                        <img class="round" width="50" height="50" avatar="{{$comment->username}}">
-                                        <div class="com_right" style="">
-                                            <p class="com_info_top"><a id="name1" @if($comment->href !='#') target="_blank" @endif href="{{$comment -> href}}">{{$comment ->username}}</a><span style="float: right;">顶（{{$comment -> zan_num}}）</span></p>
-                                            <p class="com_info_center" style="">{{$comment ->content}}</p>
-                                            <div class="com_ul_bom">
-                                                <span>{{$comment ->time}}</span>
-                                                <span id="replay"><a href="javascript:void(0)">回复</a></span>
+                                        <li>
+                                            <img class="round" size="60" avatar="{{$comment->username}}">
+                                            <div class="com_right">
+                                                <div class="comTop" style="">
+                                                    <a target="_blank" href="{{$comment->href}}">{{$comment -> username}}<span class="com_lou">{{$loop->iteration}}#</span></a>
+                                                    <button class="zan_btn" onclick="dianzan(this)" type="button"><img src="{{asset('static/index/images/zan.png')}}"><span>{{$comment -> zan_num}}</span></button>
+                                                </div>
+                                                <p class="com_p">{{$comment -> content}}</p>
+                                                <div class="comBom">
+                                                    <span>{{$comment -> time}}</span>
+                                                    <span>来自chrome浏览器</span>
+                                                    <a class="replay" href="javascript:void(0)" onclick="replayBox(this,{{$comment -> id}})">回复</a>
+                                                </div>
+                                                <!-- 回复 -->
+                                                @if($comment ->replayData)
+                                                <ul class="com2_ul">
+                                                    @foreach($comment ->replayData as $item)
+                                                    <li>
+                                                        <p style="margin-bottom: 10px;"><a href="#">{{$item ->username}}</a><span class="com_mark">游客</span>：<span>{{$item -> content}}</span></p>
+                                                        <p style="font-size: 12px;"><span>{{$item -> time}}</span><span style="margin-left: 15px;">来自Chrome浏览器</span></p>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                                @endif
                                             </div>
-                                            @if($comment ->replayData)
-{{--                                            <ul class="com_two">--}}
-{{--                                                @foreach($comment ->replayData as $item)--}}
-{{--                                                    <li>--}}
-{{--                                                        <div class="com_two_div">--}}
-{{--                                                            <p class="mb5"><a id="name2" target="_blank" href="{{$item ->href | '#'}}">{{$item->username}}</a> 回复 <a href="#">{{'@'.$item->replay_name}}</a>：<span>{{$item->content}}</span></p>--}}
-{{--                                                            <div class="com_ul_bom">--}}
-{{--                                                                <span>{{$replayData['time']}}</span>--}}
-{{--                                                                <span id="replay">回复</span>--}}
-{{--                                                            </div>--}}
-{{--                                                        </div>--}}
-{{--                                                    </li>--}}
-{{--                                                @endforeach--}}
-{{--                                            </ul>--}}
-                                            @endif
-
-                                        </div>
-                                    </li>
+                                        </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -193,7 +186,7 @@
     </div>
 @endsection
 @section('myjs')
-    <script src="{{asset('static/index/js/headimg.js')}}"></script>
+{{--    <script src="{{asset('static/index/js/headimg.js')}}"></script>--}}
     <script src="{{asset('static/index/js/comment.js')}}"></script>
     <script src="{{asset('static/index/js/highlight.pack.js')}}"></script>
     <script>

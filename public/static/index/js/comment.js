@@ -1,230 +1,489 @@
-var url=window.location.href;
-$(document).ready(function() {
+// 定义全局变量
+var isInit=false;//是否使用ajax初始化
+var article_id = document.getElementsByName('article_id')[0].value || 0;// 当前文章id,可通过url获取，或者隐藏的input
+var getCommentApi="http://www.larblog.wang/api/comment/"+article_id;//一般配合文章id
+var replayComApi='http://www.larblog.wang/comment/add';//回复所需接口，后期考虑参数映射
+/*
+ * LetterAvatar
+ * 
+ * Artur Heinze
+ * Create Letter avatar based on Initials
+ * based on https://gist.github.com/leecrossley/6027780
+ */
+(function(w, d) {
+	function LetterAvatar(name, size, color) {
 
-	// 页面加载完毕，先判断cookie是否存在，决定是否显示小卡片
-	if (getCookie('username')) {
-		$('#avatar').attr('src', LetterAvatar(getCookie('username'), 50));
-        $('#username').text(getCookie('username'));
-        $('#email').text(getCookie('email'));
-        $('#href').text(getCookie('href'));
-		console.log('存在cookie');
-		$('.create_com').css('display', 'none');
-		$('.com_card').css('display', 'flex');
-		setTimeout(function() {
-			$('.com_card').css('transform', 'rotateY(360deg)');
-		}, 10);
-	} else {
-		console.log('不存在cookie');
+		name = name || '';
+		size = size || 60;
+
+		var colours = [
+				"#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
+				"#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
+			],
+
+			nameSplit = String(name).split(' '),
+
+			initials, charIndex, colourIndex, canvas, context, dataURI;
+
+		// console.log(nameSplit)
+		if (nameSplit.length == 1) {
+			initials = nameSplit[0] ? nameSplit[0].charAt(0) : '?';
+		} else {
+			initials = nameSplit[0].charAt(0) + nameSplit[1].charAt(0);
+		}
+		if (w.devicePixelRatio) {
+			size = (size * w.devicePixelRatio);
+		}
+
+		charIndex = (initials == '?' ? 72 : initials.charCodeAt(0)) - 64;
+		colourIndex = charIndex % 20;
+		canvas = d.createElement('canvas');
+		canvas.width = size;
+		canvas.height = size;
+		context = canvas.getContext("2d");
+
+		context.fillStyle = color ? color : colours[colourIndex - 1];
+		context.fillRect(0, 0, canvas.width, canvas.height);
+		context.font = Math.round(canvas.width / 2) + "px Arial";
+		context.textAlign = "center";
+		context.fillStyle = "#FFF";
+		context.fillText(initials, size / 2, size / 1.5);
+
+		dataURI = canvas.toDataURL();
+		canvas = null;
+
+		return dataURI;
 	}
 
-	//点击回复事件
-	$('.com_ul').on('click', '#replay', function(e) {
-		// console.log('点击了回复');
-        var ee=$(this).parents('.com_ul_bom').prevAll('.com_info_top').children('.replay_id').text();
-		console.log(ee+'ssssssss')
-        var name = $(this).parents('.com_ul_bom').prevAll('.com_info_top').children('#name1').text();
-		if (!name) {
-			name = $(this).parents('.com_two_div').children('p').children('#name2').text();
-            var ee=$(this).parents('.com_two_div').children('p').children('.replay_id').text();
-            console.log(ee+'ssssssss')
-			if (!name) {
-				alert('请刷新页面再回复本条内容！');
-				location.reload();
+	LetterAvatar.transform = function() {
+
+		Array.prototype.forEach.call(d.querySelectorAll('img[avatar]'), function(img, name, color) {
+			name = img.getAttribute('avatar');
+			color = img.getAttribute('color');
+			img.src = LetterAvatar(name, img.getAttribute('width'), color);
+			img.removeAttribute('avatar');
+			img.setAttribute('alt', name);
+		});
+	};
+
+
+	// AMD support
+	if (typeof define === 'function' && define.amd) {
+
+		define(function() {
+			return LetterAvatar;
+		});
+
+		// CommonJS and Node.js module support.
+	} else if (typeof exports !== 'undefined') {
+		// Support Node.js specific `module.exports` (which can be a function)
+		if (typeof module != 'undefined' && module.exports) {
+			exports = module.exports = LetterAvatar;
+		}
+		// But always support CommonJS module 1.1.1 spec (`exports` cannot be a function)
+		exports.LetterAvatar = LetterAvatar;
+	} else {
+		window.LetterAvatar = LetterAvatar;
+		d.addEventListener('DOMContentLoaded', function(event) {
+			LetterAvatar.transform();
+		});
+	}
+})(window, document);
+
+window.onload = function() {
+	if (getCookie('username')) {
+		let comCard = document.getElementsByClassName('com_card')[0];
+		document.getElementsByClassName('create_btn')[0].remove();
+		comCard.children[0].setAttribute('src', LetterAvatar(getCookie('username'), 60));
+		comCard.children[1].innerText = '欢迎您，'+getCookie('username');
+		comCard.style.display = 'flex';
+		setTimeout(function() {
+			comCard.style.transform = 'rotateY(360deg)';
+		}, 100);
+	} else {
+		document.getElementsByClassName('create_btn')[0].style.display = 'block'
+	}
+	if(isInit){
+		console.log('我要开始初始化数据了'+isInit);
+		ajax({
+			url: getCommentApi,
+			type: 'get',
+			dataType: 'json',
+			timeout: 10000,
+			contentType: "application/json",
+			success: function(data) {
+				data = JSON.parse(data);
+				console.log(data);
+				initComment(data);
+			},
+			//异常处理
+			error: function(e) {
+				console.log(e);
 			}
+		})
+	}
+	
+	function initComment(data) {
+		let len = data.length;
+		if (len < 1) {
+			return false
 		}
-		setCookie('replayname', name); //将要@的人存入cookie
-		var replay_div = '<div class="replay_div"><input class="com_input" type="text" name="title" placeholder="回复 @ ' +
-			name + ' : "/><div class="repaly_btn_div"><button class="replay_btn" id="twoReplay">回复</button></div></div>';
-		if ($('.com_right .replay_div').length < 1) {
-			$(this).parents('.com_ul_bom').after(replay_div);
-			// console.log('要回复的人是：');
-			// console.log(name);
-		} else {
-			//已经有回复框存在的情况
-			// console.log('已经有回复框存在了');
-			$(".replay_div").remove();
-			$(this).parents('.com_ul_bom').after(replay_div);
-		}
-	})
-	// 动态回复按钮监听
-	$('.com_right').on('click', '.replay_btn', function(e) {
-		if (getCookie('username')) {
-			var replaytext = $(this).parents('.replay_div').children('input').val();
-			console.log(replaytext);
-			var replaycontent = '<li><div class="com_two_div"><p class="mb5"><a id="name2" href="#">' + getCookie('username') +
-				' </a>回复 <a href="#">@' + getCookie('replayname') + '</a>：<span>' + replaytext +
-				'</span></p><div class="com_ul_bom"><span>15分钟前</span><span id="replay">回复</span></div></div></li>';
-			if (!replaytext == '') {
-				// $(this).parents('.com_two').prepend(replaycontent);
-				//判断是否存在二级com_two元素
-				if ($(this).parents('.com_right').children('.com_two').length < 1) {
-					replaycontent = '<ul class="com_two">' + replaycontent + '</ul>';
-					$(this).parents('.com_right').append(replaycontent);
-				} else {
-					$(this).parents('.com_right').children('.com_two').prepend(replaycontent);
+		let com_ul = document.createElement('ul');
+		var com_li = '';
+		com_ul.setAttribute('class', 'com_ul');
+		for (let i = 0; i < len; i++) {
+			// console.log(data[i].replaydata)
+			let replaydata = data[i].replayData;
+			let replayStr = '';
+			if (replaydata.length >= 1) {
+				for (let i = 0; i < replaydata.length; i++) {
+					replayStr = replayStr + '<li><p style="margin-bottom: 10px;"><a href="#">' + replaydata[i].username +
+						'</a><span class="com_mark">站长</span>：<span>' +
+						replaydata[i].content +
+						'</span></p><p style="font-size: 12px;"><span>' + replaydata[i].time +
+						'</span><span style="margin-left: 15px;">来自Chrome浏览器</span></p></li>';
 				}
-				$(this).parents('.replay_div').remove();
-				//ajax发送数据
-                $.ajax({
-                    type:'POST',
-                    headers:{'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')},
-                    url:'/comment/add',
-                    data:{
-                        username:getCookie('username'),
-                        article_id:url.substring(url.indexOf('info/')+5),
-                        username:getCookie('username'),
-                        href:getCookie('href'),
-                        email:getCookie('email'),
-                        content:replaytext,
-                        replay_id:''
-                    },
-                    success:function (res) {
-                        console.log(res);
-                    },error:function (res) {
-                        console.log('回复失败了');
-                    }
-                })
-			} else {
-				alert('内容不能为空哦');
+				replayStr = '<ul class="com2_ul">' + replayStr + '</ul>';
 			}
-			// alert(getCookie('replayname'));
-			// console.log($(this).parents('.replay_div').children('input').val());
+			com_li = com_li + '<li><img class="round" src="' + LetterAvatar(data[i].username, 60) +
+				'" avatar=""><div class="com_right"><div class="comTop"><a href="' + data[i].href + '">' + data[i].username +
+				'<span class="com_lou">2#</span></a><button class="zan_btn" type="button" onclick="dianzan(this)"><img src="img/zan1.png"><span>8</span></button></div><p class="com_p">' +
+				data[i].content + '</p><div class="comBom"><span>' + data[i].time + '</span><span>来自' + data[i].username +
+				'浏览器</span><a class="replay" href="javascript:void(0)" onclick="replayBox(this,' + data[i].id + ')">回复</a></div>' +
+				replayStr + '</div></li>';
+		}
+		com_ul.innerHTML = com_li;
+		com_list = document.getElementsByClassName('com_list')[0];
+		com_list.appendChild(com_ul);
+	}
+}
+// 发表评论
+function comment() {
+	let content = document.getElementsByName('content')[0].value;
+	if (!content) {
+		tip('内容不能为空！');
+		return false;
+	}
+	let username = getCookie('username');
+	let email = getCookie('email');
+	let href = getCookie('href');
+	if (!username) {
+		tip('请先生成名片！');
+		return false;
+	}
+	// 防止刷评论（一分钟最多三条，三条后五分钟内不能发）
+	let count = getCookie('count');
+	if (count) {
+		if (count >= 3) {
+			tip('您真的有那么多话说嘛？不如先歇息一会吧！');
+			setCookie('count', ++count, 5 * 60);
+			return false;
 		} else {
-			alert('请您先生成小名片');
+			setCookie('count', ++count, 60);
+		}
+	} else {
+		setCookie('count', 1, 10);
+	}
+	let avatar = username;
+	let liulanqi = getExploreName();
+	ele = document.createElement("li");
+	ele.innerHTML = '<img class="round" src="' + LetterAvatar(avatar, 60) +
+		'" avatar=""><div class="com_right"><div class="comTop"><a href="' + href + '">' + username +
+		'<span class="com_lou">2#</span></a><button class="zan_btn" type="button"><img src="img/zan1.png"><span>8</span></button></div><p class="com_p">' +
+		content + '</p><div class="comBom"><span>1秒前</span><span>来自' + liulanqi + '浏览器</span></div></div>';
+	com_ul = document.getElementsByClassName('com_ul')[0];
+	com_ul.prepend(ele);
+
+	// 开始Ajax吧
+	// console.log(username)
+	// console.log(email)
+	// console.log(href)
+	// console.log(content)
+	// console.log(liulanqi)
+	//基本的使用实例
+	ajax({
+		url: replayComApi,
+		type: 'post',
+		data: {
+			username: username,
+			content: content,
+			href: href,
+			email: email,
+			article_id: article_id
+		},
+		dataType: 'json',
+		timeout: 10000,
+		contentType: "application/json",
+		success: function(data) {
+			// console.log(data); //服务器返回响应，根据响应结果，分析是否登录成功
+			tip('评论成功！');
+			document.getElementsByName('content')[0].value = '';
+		},
+		//异常处理
+		error: function(e) {
+			console.log(e);
 		}
 	})
 
-	// 创建小名片按钮点击
-	$('#create_btn').click(function() {
-		var username = $("input[ name='username' ] ").val();
-		var email = $("input[ name='email' ] ");
-		var href = $("input[ name='href' ] ");
-		var title = $("textarea[ name='title' ] ").val();
-        href = href.val() || '#';
-		email = email.val() || '无';
-		if (!username) {
-			alert('请先填写昵称哦！');
-			return false;
+
+}
+
+//点击回复出现回复框
+function replayBox(e, index) {
+	console.log('id为' + index)
+	ele = document.createElement('div');
+	ele.setAttribute('id', 'replay_box');
+	ele.setAttribute('class', 'com_area_div');
+	// ele.innerHTML='<div id="replay_box" class="com_area_div"><textarea name="replay_content" placeholder="我也要说......"></textarea><div class="area_bom"><img src="img/emoji.png"><input class="com_btn" type="button" onclick="replay(this)" value="回复" /></div></div>';
+	ele.innerHTML =
+		'<textarea name="replay_content" placeholder="我也要说......"></textarea><div class="area_bom"><img src="img/emoji.png"><input class="com_btn" type="button" onclick="replay(this,' +
+		index + ')" value="回复" /></div>';
+	replay_box = document.getElementById('replay_box');
+	if (replay_box) {
+		replay_box.parentNode.removeChild(replay_box);
+	}
+	e.parentNode.appendChild(ele);
+	// console.log(replay_box)
+	// alert(this.app)
+}
+//评论回复
+function replay(e, index) {
+	replay_ele = document.getElementsByName('replay_content')[0];
+	replay_content = replay_ele.value; //回复的内容
+	if (!replay_content) {
+		alert('内容不能为空');
+		return false;
+	}
+	// console.log(e.parentNode.parentNode.parentNode);
+	ele = document.createElement('li');
+	eleStr = '<p style="margin-bottom: 10px;"><a href="#">无极剑圣</a><span class="com_mark">站长</span>：<span>' +
+		replay_content +
+		'</span></p><p style="font-size: 12px;"><span>1秒前</span><span style="margin-left: 15px;">来自Chrome浏览器</span></p>';
+	ele.innerHTML = eleStr;
+
+	// 判断这个评论下是否已经有了二级评论,没有会找不到com2_ul,所以判断
+	eleTemp = e.parentNode.parentNode.parentNode;
+	if (eleTemp.nextElementSibling) {
+		eleTemp.nextElementSibling.prepend(ele)
+	} else {
+		eleUl = document.createElement('ul');
+		eleUl.setAttribute('class', 'com2_ul');
+		eleUl.innerHTML = '<li>' + eleStr + '</li>'
+		eleTemp.parentNode.appendChild(eleUl);
+	}
+	// com2_ul.prepend(ele)
+	console.log('回复的内容为：' + replay_ele.value);
+	// 移除回复框
+	replay_ele.parentNode.parentNode.removeChild(replay_ele.parentNode);
+	console.log('ajax要回复的id为' + index)
+	// Ajax该你登场了
+	// replay_ele.value='';
+
+	//基本的使用实例
+	ajax({
+		url: "http://www.larblog.wang/comment/add",
+		type: 'post',
+		data: {
+			username: getCookie('username'),
+			content: replay_ele.value,
+			href: getCookie('href'),
+			email: getCookie('email'),
+			article_id: article_id,
+			replay_id: index
+		},
+		dataType: 'json',
+		timeout: 10000,
+		contentType: "application/json",
+		success: function(data) {
+			// console.log(data); //服务器返回响应，根据响应结果，分析是否登录成功
+			tip('评论成功！')
+		},
+		//异常处理
+		error: function(e) {
+			console.log(e);
 		}
-		// 验证通过，数据存入cookie，并生成小名片
+	})
+
+}
+// 创建身份
+function createCard(e) {
+	if (!navigator.cookieEnabled) {
+		console.log('cookie未启用，功能将受限！');
+		return false;
+	}
+	// 存cookie
+	let msg = isGood();
+	if (msg) {
+		tip(msg);
+		return false;
+	}
+	console.log(getCookie('username'));
+	console.log(getCookie('email'));
+	console.log(getCookie('href'));
+	let comCard = document.getElementsByClassName('com_card')[0];
+	comCard.style.display = 'flex';
+	setTimeout(function() {
+		comCard.style.transform = 'rotateY(360deg)';
+	}, 100);
+	e.remove();
+	let com_card = document.getElementsByClassName('com_card')[0];
+	// com_card.children
+	com_card.children[0].setAttribute('src', LetterAvatar(getCookie('username'), 60));
+	com_card.children[1].innerText = getCookie('username');
+	// console.log(com_card.children[1]);
+
+	//基本的使用实例
+	ajax({
+		url: "http://www.larblog.wang/api/comment/1",
+		type: 'get',
+		data: {
+			username: 'username',
+			password: 'password'
+		},
+		dataType: 'json',
+		timeout: 10000,
+		contentType: "application/json",
+		success: function(data) {
+			// console.log(data); //服务器返回响应，根据响应结果，分析是否登录成功
+		},
+		//异常处理
+		error: function(e) {
+			console.log(e);
+		}
+	})
+
+}
+
+// 点赞
+function dianzan(e) {
+	console.log('点赞了');
+	e.childNodes[1].innerText++;
+
+}
+// 用户信息合法性判断
+function isGood() {
+	let username = document.getElementsByName('username')[0].value;
+	let email = document.getElementsByName('email')[0].value || '无';
+	let href = document.getElementsByName('href')[0].value || '#';
+	if (!username) {
+		return '请填写昵称哦'
+	} else {
+		// 验证通过,存入cookie
 		setCookie('username', username);
 		setCookie('email', email);
 		setCookie('href', href);
-		$('#avatar').attr('src', LetterAvatar(username, 50));
-		$('#username').text(username);
-		$('#email').text(email);
-		$('#href').text(href);
-		$(this).remove();
-		$('.create_com').css('display', 'none');
-		$('.com_card').css('display', 'flex');
-		setTimeout(function() {
-			$('.com_card').css('transform', 'rotateY(360deg)');
-		}, 10);
-
-	})
-})
-function comment() {
-	// console.log($('#form0').serialize());//ajax提交表单数据
-	var title = $("textarea[ name='title' ] ").val();
-	var time = '1秒前';
-	if (title == '') {
-		alert('评论内容不能为空哦!');
 		return false;
 	}
-	if (getCookie('username')) {
-		var username = getCookie('username');
-		var email = getCookie('email');
-		var href = getCookie('href');
+}
+// 获取浏览器信息
+function getExploreName() {
+	var userAgent = navigator.userAgent;
+	if (userAgent.indexOf("Opera") > -1 || userAgent.indexOf("OPR") > -1) {
+		return 'Opera';
+	} else if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1) {
+		return 'IE';
+	} else if (userAgent.indexOf("Edge") > -1) {
+		return 'Edge';
+	} else if (userAgent.indexOf("Firefox") > -1) {
+		return 'Firefox';
+	} else if (userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1) {
+		return 'Safari';
+	} else if (userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1) {
+		return 'Chrome';
+	} else if (!!window.ActiveXObject || "ActiveXObject" in window) {
+		return 'IE>=11';
 	} else {
-		alert('生成名片后，才能评论哦');
-		return false;
+		return 'Unkonwn';
 	}
-	var avatar_img = 'src="' + LetterAvatar(username, 50) + '" title="' + username + '" alt="' + username + '"';
-	var com = '<li><img class="round" width="50" height="50" ' + avatar_img +
-		'><div class="com_right" style=""><p class="com_info_top"><a href="#">' + username +
-		'</a><span style="float: right;">顶（18）</span></p><p class="com_info_center" style="">' + title +
-		'</p><div class="com_ul_bom"><span>' + time +
-		'</span><span id="replay"><a href="javascript:void(0)">回复</a></span></div></div></li>';
-	// $('.com_ul').prepend('<p>你好啊</p>')
-	setCookie('username', username);
-	console.log(getCookie('username')+'sssssss');
-	$('.com_ul').prepend(com);
+}
+// 设置cookie
+function setCookie(cname, cvalue, exmiao = 60 * 60 * 24 * 30) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exmiao * 1000));
+	// d.setTime(d.getTime()+(exdays*24*60*60*1000));
+	var expires = "expires=" + d.toGMTString();
+	document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+// 获取cookie
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i].trim();
+		if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+	}
+	return "";
+}
+// 封装消息提示
+function tip(value) {
+	let body = document.getElementsByTagName('body')[0];
+	let etip = document.createElement('div');
+	etip.setAttribute('class', 'action_tip');
+	etip.innerHTML = '<p>' + value + '</p>';
+	body.appendChild(etip);
+	setTimeout(function() {
+		etip.remove();
+	}, 3000);
+}
+// 下面是封装的ajax
+function ajax(options) {
+	options = options || {}; //调用函数时如果options没有指定，就给它赋值{},一个空的Object
+	options.type = (options.type || "GET").toUpperCase(); /// 请求格式GET、POST，默认为GET
+	options.dataType = options.dataType || "json"; //响应数据格式，默认json
 
-	//ajax提交数据到服务器
-    $.ajax({
-        type:'POST',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-        },
-        url:'/comment/add',
-        data:{
-            article_id:url.substring(url.indexOf('info/')+5),
-            username:getCookie('username'),
-            href:getCookie('href'),
-            email:getCookie('email'),
-            content:title,
-        },
-        success:function (res) {
-            console.log(res);
-        },error:function (res) {
-            console.log('error');
-        }
-    })
-}
-//生成随机整数
-function randomNum(minNum, maxNum) {
-	switch (arguments.length) {
-		case 1:
-			return parseInt(Math.random() * minNum + 1, 10);
-			break;
-		case 2:
-			return parseInt(Math.random() * (maxNum - minNum + 1) + minNum, 10);
-			break;
-		default:
-			return 0;
-			break;
+	var params = formatParams(options.data); //options.data请求的数据
+
+	var xhr;
+
+	//考虑兼容性
+	if (window.XMLHttpRequest) {
+		xhr = new XMLHttpRequest();
+	} else if (window.ActiveObject) { //兼容IE6以下版本
+		xhr = new ActiveXobject('Microsoft.XMLHTTP');
 	}
-}
-//设置cookie
-function setCookie(name, value) {
-	var Days = 30;
-	var exp = new Date();
-	exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-	document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+
+	//启动并发送一个请求
+	if (options.type == "GET") {
+		xhr.open("GET", options.url + "?" + params, true);
+		xhr.send(null);
+	} else if (options.type == "POST") {
+		xhr.open("post", options.url, true);
+
+		//设置表单提交时的内容类型
+		//Content-type数据请求的格式
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.send(params);
+	}
+
+	//    设置有效时间
+	setTimeout(function() {
+		if (xhr.readySate != 4) {
+			xhr.abort();
+		}
+	}, options.timeout)
+
+	//    接收
+	//     options.success成功之后的回调函数  options.error失败后的回调函数
+	//xhr.responseText,xhr.responseXML  获得字符串形式的响应数据或者XML形式的响应数据
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			var status = xhr.status;
+			if (status >= 200 && status < 300 || status == 304) {
+				options.success && options.success(xhr.responseText, xhr.responseXML);
+			} else {
+				options.error && options.error(status);
+			}
+		}
+	}
 }
 
-// 读取cookie
-function getCookie(name) {
-	var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
-	if (arr = document.cookie.match(reg))
-		return unescape(arr[2]);
-	else {
-		return null;
+//格式化请求参数
+function formatParams(data) {
+	var arr = [];
+	for (var name in data) {
+		arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
 	}
-}
-// 删除cookie
-function delCookie(name) {
-	var exp = new Date();
-	exp.setTime(exp.getTime() - 1);
-	var cval = getCookie(name);
-	if (cval != null)
-		document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-}
-//验证邮箱
-function isEmail(email) {
-	var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-	if (reg.test(email)) {
-		return true;
-	} else {
-		return false;
-	}
-}
-//简单验证url合法性
-function checkUrl(url) {
-	var reg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
-	if (reg.test(url)) {
-		return true;
-	} else {
-		return false;
-	}
+	// arr.push(("v=" + Math.random()).replace(".", ""));
+	return arr.join("&");
+
 }

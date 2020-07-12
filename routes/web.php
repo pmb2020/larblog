@@ -67,6 +67,8 @@ Route::namespace('Index')->group(function (){
     Route::any('search','SearchController@index');
     Route::get('comment','CommentController@index');
     Route::any('comment/add','CommentController@create');
+
+    Route::any('api/comment/{id}','CommentController@getCommentData');
 });
 
 //重定向
