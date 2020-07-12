@@ -1,30 +1,25 @@
 // 定义全局变量
 var isInit=false;//是否使用ajax初始化
 var article_id = document.getElementsByName('article_id')[0].value || 0;// 当前文章id,可通过url获取，或者隐藏的input
-var getCommentApi="http://www.larblog.wang/api/comment/"+article_id;//一般配合文章id
-var replayComApi='http://www.larblog.wang/comment/add';//回复所需接口，后期考虑参数映射
+var getCommentApi="http://www.gold404.cn/api/comment/"+article_id;//一般配合文章id
+var replayComApi='http://www.gold404.cn/comment/add';//回复所需接口，后期考虑参数映射
 /*
  * LetterAvatar
- * 
+ *
  * Artur Heinze
  * Create Letter avatar based on Initials
  * based on https://gist.github.com/leecrossley/6027780
  */
 (function(w, d) {
 	function LetterAvatar(name, size, color) {
-
 		name = name || '';
 		size = size || 60;
-
 		var colours = [
 				"#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
 				"#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
 			],
-
 			nameSplit = String(name).split(' '),
-
 			initials, charIndex, colourIndex, canvas, context, dataURI;
-
 		// console.log(nameSplit)
 		if (nameSplit.length == 1) {
 			initials = nameSplit[0] ? nameSplit[0].charAt(0) : '?';
@@ -122,7 +117,7 @@ window.onload = function() {
 			}
 		})
 	}
-	
+
 	function initComment(data) {
 		let len = data.length;
 		if (len < 1) {
