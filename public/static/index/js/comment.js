@@ -3,6 +3,8 @@ var isInit=false;//是否使用ajax初始化
 var article_id = document.getElementsByName('article_id')[0].value || 0;// 当前文章id,可通过url获取，或者隐藏的input
 var getCommentApi="http://www.gold404.cn/api/comment/"+article_id;//一般配合文章id
 var replayComApi='http://www.gold404.cn/comment/add';//回复所需接口，后期考虑参数映射
+// getCommentApi="http://www.larblog.wang/api/comment/"+article_id;//一般配合文章id
+// replayComApi='http://www.larblog.wang/comment/add';//回复所需接口，后期考虑参数映射
 /*
  * LetterAvatar
  *
@@ -12,14 +14,19 @@ var replayComApi='http://www.gold404.cn/comment/add';//回复所需接口，后�
  */
 (function(w, d) {
 	function LetterAvatar(name, size, color) {
+
 		name = name || '';
 		size = size || 60;
+
 		var colours = [
 				"#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50",
 				"#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400", "#c0392b", "#bdc3c7", "#7f8c8d"
 			],
+
 			nameSplit = String(name).split(' '),
+
 			initials, charIndex, colourIndex, canvas, context, dataURI;
+
 		// console.log(nameSplit)
 		if (nameSplit.length == 1) {
 			initials = nameSplit[0] ? nameSplit[0].charAt(0) : '?';
@@ -231,7 +238,7 @@ function replayBox(e, index) {
 	ele.setAttribute('class', 'com_area_div');
 	// ele.innerHTML='<div id="replay_box" class="com_area_div"><textarea name="replay_content" placeholder="我也要说......"></textarea><div class="area_bom"><img src="img/emoji.png"><input class="com_btn" type="button" onclick="replay(this)" value="回复" /></div></div>';
 	ele.innerHTML =
-		'<textarea name="replay_content" placeholder="我也要说......"></textarea><div class="area_bom"><img src="img/emoji.png"><input class="com_btn" type="button" onclick="replay(this,' +
+		'<textarea name="replay_content" placeholder="我也要说......"></textarea><div class="area_bom"><img src="http://www.gold404.cn/static/index/images/emoji.png"><input class="com_btn" type="button" onclick="replay(this,' +
 		index + ')" value="回复" /></div>';
 	replay_box = document.getElementById('replay_box');
 	if (replay_box) {
@@ -249,11 +256,13 @@ function replay(e, index) {
 		alert('内容不能为空');
 		return false;
 	}
+	let username = getCookie('username');
+	let liulanqi = getExploreName();
 	// console.log(e.parentNode.parentNode.parentNode);
 	ele = document.createElement('li');
-	eleStr = '<p style="margin-bottom: 10px;"><a href="#">无极剑圣</a><span class="com_mark">站长</span>：<span>' +
+	eleStr = '<p style="margin-bottom: 10px;"><a href="#">'+username+'</a><span class="com_mark">游客</span>：<span>' +
 		replay_content +
-		'</span></p><p style="font-size: 12px;"><span>1秒前</span><span style="margin-left: 15px;">来自Chrome浏览器</span></p>';
+		'</span></p><p style="font-size: 12px;"><span>1秒前</span><span style="margin-left: 15px;">来自'+liulanqi+'浏览器</span></p>';
 	ele.innerHTML = eleStr;
 
 	// 判断这个评论下是否已经有了二级评论,没有会找不到com2_ul,所以判断
@@ -273,13 +282,12 @@ function replay(e, index) {
 	console.log('ajax要回复的id为' + index)
 	// Ajax该你登场了
 	// replay_ele.value='';
-
 	//基本的使用实例
 	ajax({
-		url: "http://www.larblog.wang/comment/add",
+		url: replayComApi,
 		type: 'post',
 		data: {
-			username: getCookie('username'),
+			username: username,
 			content: replay_ele.value,
 			href: getCookie('href'),
 			email: getCookie('email'),
@@ -298,7 +306,6 @@ function replay(e, index) {
 			console.log(e);
 		}
 	})
-
 }
 // 创建身份
 function createCard(e) {
@@ -326,26 +333,6 @@ function createCard(e) {
 	com_card.children[0].setAttribute('src', LetterAvatar(getCookie('username'), 60));
 	com_card.children[1].innerText = getCookie('username');
 	// console.log(com_card.children[1]);
-
-	//基本的使用实例
-	ajax({
-		url: "http://www.larblog.wang/api/comment/1",
-		type: 'get',
-		data: {
-			username: 'username',
-			password: 'password'
-		},
-		dataType: 'json',
-		timeout: 10000,
-		contentType: "application/json",
-		success: function(data) {
-			// console.log(data); //服务器返回响应，根据响应结果，分析是否登录成功
-		},
-		//异常处理
-		error: function(e) {
-			console.log(e);
-		}
-	})
 
 }
 
