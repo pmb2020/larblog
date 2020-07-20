@@ -42,7 +42,7 @@ class InfoController extends Controller
             'infoData' => $infoData,
             'prev_article'=>$prev_article,
             'next_article'=>$next_article,
-            'comments'=>Comment::getComment($id)
+            'comments'=>Comment::getComment(explode('.',$id)[0])
         ]);
     }
 }
