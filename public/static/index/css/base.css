@@ -490,14 +490,16 @@ width: 14px;height: 14px;margin-right: 5px;vertical-align: middle;position: rela
     list-style: decimal;
     margin: 0 0 0 40px!important;
     padding: 0;
+    font-size: 14px;
+    font-family: Source Code Pro,DejaVu Sans Mono,Droid Sans Mono,Menlo,Monaco,Consolas,Inconsolata,Courier,Microsoft YaHei,sans-serif;
 }
 .hljs li {
-    list-style: decimal-leading-zero;
+    list-style: decimal;
     border-left: 1px solid #111!important;
     padding: 5px 5px!important;
     margin: 0!important;
     line-height: 16px;
-    font-size: 18px;
+    /*font-size: 18px;*/
     width: 100%;
     box-sizing: border-box
 }
