@@ -6,7 +6,7 @@
 
 @section('style')
     <meta name="_token" content="{{ csrf_token() }}"/>
-    <link rel="stylesheet" href="{{asset('static/index/css/styles/dracula.css')}}">
+    <link rel="stylesheet" href="{{asset('static/index/css/styles/atom-one-dark.css')}}">
     <link rel="stylesheet" href="{{asset('static/index/css/comment.css')}}">
     <style>
         code li br{display: none}

@@ -488,17 +488,15 @@ width: 14px;height: 14px;margin-right: 5px;vertical-align: middle;position: rela
 /*代码高亮行号*/
 .hljs ul {
     list-style: decimal;
-    margin: 0 0 0 40px!important;
-    padding: 0;
+    margin: 0 0 0 38px!important;
     font-size: 14px;
     font-family: Source Code Pro,DejaVu Sans Mono,Droid Sans Mono,Menlo,Monaco,Consolas,Inconsolata,Courier,Microsoft YaHei,sans-serif;
 }
 .hljs li {
     list-style: decimal;
-    border-left: 1px solid #111!important;
-    padding: 5px 5px!important;
-    margin: 0!important;
-    line-height: 16px;
+    border-left: 1px solid #555!important;
+    line-height: 22px;
+    padding-left: 10px;
     /*font-size: 18px;*/
     width: 100%;
     box-sizing: border-box
