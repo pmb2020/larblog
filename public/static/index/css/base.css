@@ -425,8 +425,8 @@ width: 14px;height: 14px;margin-right: 5px;vertical-align: middle;position: rela
 .blog_text p span{background-color: #f9f2f4;margin: 0 5px;padding: 0 5px;border-radius: 2px;font-family: Source Code Pro,Menlo,Monaco,Consolas,Inconsolata,Courier,monospace,PingFang SC,Microsoft YaHei,sans-serif}
 .blog_text pre{margin-bottom: 15px}
 .blog_text img{max-width: 100%;height: auto;}
-.banquan{background: none repeat scroll 0 0 #e7f4ff;border:1px solid #c9ddfa;padding: 12px 15px;font-size: 14px}
-.banquan a{color: #00a67c}
+.banquan{background-color: #f5f8fc;border:1px solid #f5f8fc;padding: 12px 15px;font-size: 14px;color: #8796a8}
+.banquan a{color: #19b08a}
 .next_div{padding-top: 25px;}
 .next_div p{margin-bottom: 10px;}
 .hot_p{font-size: 15px;overflow: hidden;color: #666;}

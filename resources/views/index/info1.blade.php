@@ -56,9 +56,9 @@
                     {!! $infoData->content !!}
                 </div>
                 <!-- 文章版权说明 -->
-                <div class="banquan" style="">
+                <div class="banquan">
                     <p style="margin-bottom: 5px"><b>作者</b>：<a href="http://www.gold404.cn/about" style="margin-right: 15px">K先生</a><b>本文地址</b>：<a
-                            href="#" title="可以平凡，但不能自暴自弃">http://www.gold404.cn/</a></p>
+                            href="http://www.gold404.cn/info/{{$infoData->id}}" title="{{$infoData->title}}">http://www.gold404.cn/info/{{$infoData->id}}</a></p>
                     <p><b>版权声明</b>：本文为原创文章，版权归 <a href="http://www.gold404.cn">K先生个人博客</a> 所有，欢迎分享本文，转载请保留出处，谢谢！</p>
                 </div>
                 <div class="next_div">
