@@ -93,7 +93,7 @@
                     'key':'s'
                 },//在textarea中插入一个隐藏的输入以存储参数
                 pasteImage:true,//是否允许直接粘贴图片
-                cleanPaste:true,//自动删除粘贴内容中的所有样式
+                cleanPaste:false,//自动删除粘贴内容中的所有样式
                 upload:{
                     url:'{{ url('/admin/article/imagesUpload') }}',
                     params:null,
