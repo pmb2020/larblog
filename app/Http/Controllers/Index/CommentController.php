@@ -34,7 +34,8 @@ class CommentController extends Controller
 
             $mailData=[
                 'name' => $data['username'],
-                'content'=>$data['content']
+                'content'=>$data['content'],
+                'url' =>'http://www.gold404.cn/info/'.$data['article_id']
             ];
             Mail::to('819123980@qq.com')->send(new TestMail($mailData));
             return $res;

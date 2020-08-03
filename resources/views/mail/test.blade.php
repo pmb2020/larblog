@@ -11,6 +11,7 @@
     <h2>来自K先生个人博客的邮件测试</h2>
     <p>{{$mailData['name']}}在你的文章评论了：</p>
     <p>{{$mailData['content']}}</p>
+    <p>原文地址：<a href="{{$mailData['url'] ?? '#'}}">{{$mailData['url']?? '空'}}</a></p>
     <p style="text-align: right">来自K先生个人博客</p>
 </body>
 </html>
