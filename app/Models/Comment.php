@@ -19,9 +19,9 @@ class Comment extends Model
      * @return mixed
      */
     static function getComment($article_id){
-        $datas=Comment::where('comments.article_id',$article_id)->leftJoin('comments as replay','replay.id','=','comments.replay_id')
-            ->select('comments.*','replay.username as replay_name')
-            ->get()->toArray();
+//        $datas=Comment::where('comments.article_id',$article_id)->leftJoin('comments as replay','replay.id','=','comments.replay_id')
+//            ->select('comments.*','replay.username as replay_name')
+//            ->get()->toArray();
         $results=DB::select('SELECT com.id,com.href,com.username,com.content,com.created_at time,com.zan_num,GROUP_CONCAT(CONCAT(\'{"username":"\',rep.username,\'","replay_name":"\',com.username,\'","content":"\',rep.content,\'","time":"\',rep.created_at,\'","zan_num":"\',rep.zan_num,\'"}\'))AS replayData FROM ml_comments com LEFT  JOIN ml_comments rep ON com.id=rep.replay_id WHERE com.replay_id=0 AND com.article_id='
             .$article_id.' GROUP BY com.id');
 
@@ -43,8 +43,12 @@ class Comment extends Model
 //        }
 //        $results[2]->replayData=json_decode($results[2]->replayData,true);
         foreach ($results as $v){
-            $v->replayData=json_decode('['.$v->replayData.']');
             $v->time=changeDate($v->time);
+            if($v->replayData){
+                //json_decode不能有\n等，所以需要替换
+                $info= preg_replace('/[\x00-\x1F\x80-\x9F]/u', '', trim('['.$v->replayData.']'));
+                $v->replayData=json_decode($info);
+            }
             if ($v->replayData){
                 foreach ($v->replayData as $vv){
                     $vv->time=changeDate($vv->time);
