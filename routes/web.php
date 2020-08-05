@@ -44,6 +44,7 @@ Route::namespace('Admin')->prefix('admin')->group(function (){
         Route::post('article/imagesUpload','ArticleController@imagesUpload');
         Route::any('article/create','ArticleController@create');
         Route::any('article/delete/{id}','ArticleController@delete');
+        Route::any('article/edit/{id}','ArticleController@edit');
 
         Route::get('category','CategoryController@index');
         Route::get('comment','CommentController@index');

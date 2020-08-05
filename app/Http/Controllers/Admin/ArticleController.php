@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Psy\Util\Str;
 
 
@@ -46,6 +47,32 @@ class ArticleController extends Controller
         return view('admin.article.create',[
             'Categorys'=>$Categorys
         ]);
+    }
+
+    /**
+     * 编辑文章
+     * @param Request $request
+     * @param $id
+     * @return View
+     */
+    public function edit(Request $request,$id){
+        if ($request ->isMethod('post')){
+            $data=$this->getDesc($request -> all(),220);
+            unset($data['_token']);
+            $data['updated_at']=date('Y-m-d H:i:s', time());
+            $res=DB::table('articles')->where('id',$id)->update($data);
+            if ($res ==1){
+                return redirect('admin/article/index')->with('tip','更新成功！');
+            }else{
+                return redirect()->back();
+            }
+        }
+        $Categorys=Category::where('pid',0)->select('id','name')->get();
+        $article=Article::find($id);
+        return view('admin.article.edit',[
+                'Categorys'=>$Categorys,
+                'article' =>$article
+            ]);
     }
     //删除文章
     public function delete($id){

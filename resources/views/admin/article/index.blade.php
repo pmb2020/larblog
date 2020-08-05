@@ -45,8 +45,7 @@
                                     <span><i class="fa fa-commenting-o" aria-hidden="true"></i>{{$article -> commnet_num}}</span>
                                 </div>
                                 <div class="list_info_right">
-                                    <a class="d-none" href="#">设为私密</a>
-                                    <a class="d-none" href="#">编辑</a>
+                                    <a class="d-none" href="{{ url('admin/article/edit',[$article->id]) }}">编辑</a>
                                     <a class="del_a" href="{{ url('admin/article/delete',[$article->id]) }}" onclick="if(confirm('确定要删除吗？')==false) return false">删除</a>
                                 </div>
                             </div>
