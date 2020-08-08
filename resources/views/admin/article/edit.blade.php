@@ -85,9 +85,6 @@
                 ],
                 placeholder:'写点什么呢......',
                 defaultImage:'/static/admin/images/author.png',//插入图片显示的默认图片
-                params:{
-                    // 'key':'s'
-                },//在textarea中插入一个隐藏的输入以存储参数
                 pasteImage:true,//是否允许直接粘贴图片
                 cleanPaste:false,//自动删除粘贴内容中的所有样式
                 upload:{
@@ -100,7 +97,6 @@
             });
             // editor.setValue ('hello world');
             // console.log(editor.getValue());
-            console.log('sssssssssssss');
 
             categoryInit($('#select1').val());//初始化分类选项框
             $('#select1').change(function (e) {
