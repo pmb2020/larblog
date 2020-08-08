@@ -59,7 +59,23 @@ class Comment extends Model
         return array_reverse($results);
     }
 
+    /**
+     * 查询评论列表，后台用
+     * @param $page
+     * @return mixed
+     */
+    static function comList($page =10){
+        $com=Comment::select('articles.title','comments.*')->leftJoin('articles','comments.article_id','articles.id')->
+        orderBy('id','desc')->paginate($page);
+        foreach ($com as $v){
+            $v->time=changeDate($v->created_at);
+        }
+        return $com;
+    }
+
 }
+
+
 
 /**
  * 转换时间，超过7天才显示具体时间，否则，例如10分钟前

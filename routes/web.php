@@ -48,6 +48,7 @@ Route::namespace('Admin')->prefix('admin')->group(function (){
 
         Route::get('category','CategoryController@index');
         Route::get('comment','CommentController@index');
+        Route::get('comment/delete','CommentController@delete');
         Route::get('config','ConfigController@index');
         Route::any('config/save','ConfigController@saveConfig');
     });
