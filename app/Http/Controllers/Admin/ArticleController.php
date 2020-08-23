@@ -59,6 +59,9 @@ class ArticleController extends Controller
         if ($request ->isMethod('post')){
             $data=$this->getDesc($request -> all(),220);
             unset($data['_token']);
+            if (!$data['cover']){
+                unset($data['cover']);
+            }
             $data['updated_at']=date('Y-m-d H:i:s', time());
             $res=DB::table('articles')->where('id',$id)->update($data);
             if ($res ==1){
