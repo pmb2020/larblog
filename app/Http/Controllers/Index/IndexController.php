@@ -95,7 +95,7 @@ class IndexController extends Controller
      * @return mixed
      */
     public function getArticle($category_id,$pageNum){
-        $data=Article::where('category_id',$category_id)->with('Category:id,name')->orderBy('id','desc')->paginate($pageNum);
+        $data=Article::where('category_id',$category_id)->with('Category:id,name')->orderBy('is_top','desc')->orderBy('id','desc')->paginate($pageNum);
         return $data;
     }
 }
