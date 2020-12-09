@@ -22,7 +22,7 @@ class Comment extends Model
 //        $datas=Comment::where('comments.article_id',$article_id)->leftJoin('comments as replay','replay.id','=','comments.replay_id')
 //            ->select('comments.*','replay.username as replay_name')
 //            ->get()->toArray();
-        $results=DB::select('SELECT com.id,com.href,com.username,com.content,com.created_at time,com.zan_num,GROUP_CONCAT(CONCAT(\'{"username":"\',rep.username,\'","replay_name":"\',com.username,\'","content":"\',rep.content,\'","time":"\',rep.created_at,\'","zan_num":"\',rep.zan_num,\'"}\'))AS replayData FROM ml_comments com LEFT  JOIN ml_comments rep ON com.id=rep.replay_id WHERE com.replay_id=0 AND com.article_id='
+        $results=DB::select('SELECT com.id,com.href,com.username,com.content,com.created_at time,com.zan_num,GROUP_CONCAT(CONCAT(\'{"username":"\',rep.username,\'","replay_name":"\',com.username,\'","replay_role":"\',rep.role,\'","content":"\',rep.content,\'","time":"\',rep.created_at,\'","zan_num":"\',rep.zan_num,\'"}\'))AS replayData FROM ml_comments com LEFT  JOIN ml_comments rep ON com.id=rep.replay_id WHERE com.replay_id=0 AND com.article_id='
             .$article_id.' GROUP BY com.id');
 
 //        foreach ($datas as $k=>$v){

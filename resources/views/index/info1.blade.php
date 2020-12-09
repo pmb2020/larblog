@@ -152,7 +152,14 @@
                                                 <ul class="com2_ul">
                                                     @foreach($comment ->replayData as $item)
                                                     <li>
-                                                        <p style="margin-bottom: 10px;"><a href="#">{{$item ->username}}</a><span class="com_mark">游客</span>：<span>{{$item -> content}}</span></p>
+                                                        <p style="margin-bottom: 10px;"><a href="#">{{$item ->username}}{{$item ->replay_role}}</a>
+                                                                @if($item->replay_role)
+                                                                <span class="com_mark" style="background-color: #60c315">管理</span>：
+                                                                @else
+                                                                <span class="com_mark">游客</span>：
+                                                            @endif
+                                                            <span>{{$item -> content}}</span>
+                                                        </p>
                                                         <p style="font-size: 12px;"><span>{{$item -> time}}</span><span style="margin-left: 15px;">来自Chrome浏览器</span></p>
                                                     </li>
                                                     @endforeach

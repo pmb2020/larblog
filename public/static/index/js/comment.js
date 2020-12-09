@@ -1,10 +1,8 @@
 // 定义全局变量
 var isInit=false;//是否使用ajax初始化
 var article_id = document.getElementsByName('article_id')[0].value || 0;// 当前文章id,可通过url获取，或者隐藏的input
-var getCommentApi="http://www.gold404.cn/api/comment/"+article_id;//一般配合文章id
-var replayComApi='http://www.gold404.cn/comment/add';//回复所需接口，后期考虑参数映射
-// getCommentApi="http://www.larblog.wang/api/comment/"+article_id;//一般配合文章id
-// replayComApi='http://www.larblog.wang/comment/add';//回复所需接口，后期考虑参数映射
+getCommentApi="/api/comment/"+article_id;//一般配合文章id
+replayComApi='/comment/add';//回复所需接口，后期考虑参数映射
 /*
  * LetterAvatar
  *
@@ -106,7 +104,7 @@ window.onload = function() {
 		document.getElementsByClassName('create_btn')[0].style.display = 'block'
 	}
 	if(isInit){
-		console.log('我要开始初始化数据了'+isInit);
+		// console.log('我要开始初始化数据了'+isInit);
 		ajax({
 			url: getCommentApi,
 			type: 'get',
@@ -115,7 +113,7 @@ window.onload = function() {
 			contentType: "application/json",
 			success: function(data) {
 				data = JSON.parse(data);
-				console.log(data);
+				// console.log(data);
 				initComment(data);
 			},
 			//异常处理
@@ -276,10 +274,10 @@ function replay(e, index) {
 		eleTemp.parentNode.appendChild(eleUl);
 	}
 	// com2_ul.prepend(ele)
-	console.log('回复的内容为：' + replay_ele.value);
+	// console.log('回复的内容为：' + replay_ele.value);
 	// 移除回复框
 	replay_ele.parentNode.parentNode.removeChild(replay_ele.parentNode);
-	console.log('ajax要回复的id为' + index)
+	// console.log('ajax要回复的id为' + index)
 	// Ajax该你登场了
 	// replay_ele.value='';
 	//基本的使用实例
