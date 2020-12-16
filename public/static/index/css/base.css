@@ -113,7 +113,8 @@ aside{background-color: #fff;padding: 20px;box-shadow: 0 4px 5px 0 #d9dfe9}
 .info_web li span{font-weight: 800;color: #333;}
 .info_web li:last-child{border-right: 0;}*/
 .abtext {
-    padding: 18px 15px;
+    text-indent: 2em;
+    padding:0 15px 5px 15px;
     color: #999;
     line-height: 26px;
     text-align: justify;
