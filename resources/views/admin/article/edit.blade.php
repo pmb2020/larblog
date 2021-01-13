@@ -86,7 +86,7 @@
                 placeholder:'写点什么呢......',
                 defaultImage:'/static/admin/images/author.png',//插入图片显示的默认图片
                 pasteImage:true,//是否允许直接粘贴图片
-                cleanPaste:false,//自动删除粘贴内容中的所有样式
+                cleanPaste:true,//自动删除粘贴内容中的所有样式
                 upload:{
                     url:'{{ url('/admin/article/imagesUpload') }}',
                     params:null,

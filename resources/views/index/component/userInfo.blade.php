@@ -9,9 +9,4 @@
         <p class="abtext">{{$config['web_profile']}}</p>
         <p class="abtext">博主邮箱：pmb2020@163.com</p>
     </div>
-{{--    <ul class="info_web">--}}
-{{--        <li><span>45</span><p>文章</p></li>--}}
-{{--        <li><span>20</span><p>评论</p></li>--}}
-{{--        <li><span>670</span><p>浏览</p></li>--}}
-{{--    </ul>--}}
 </aside>
