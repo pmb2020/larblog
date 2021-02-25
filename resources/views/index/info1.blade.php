@@ -196,7 +196,8 @@
 {{--    <script src="{{asset('static/index/js/headimg.js')}}"></script>--}}
     <script src="{{asset('static/index/js/comment.js')}}"></script>
     <script src="{{asset('static/index/js/highlight.pack.js')}}"></script>
-    <script src="http://cdn.gold404.cn/js/alone-imgView.js"></script>
+    <script src="{{asset('static/index/js/alone-imgView.js')}}"></script>
+{{--    <script src="http://cdn.gold404.cn/js/alone-imgView.js"></script>--}}
     <script>
         // 点击放大图片
         alone.config={

@@ -16,6 +16,7 @@ class CheckAge
     public function handle($request, Closure $next)
     {
         if (!$request->session()->has('user_name')) {
+//            dd($request->server());
             return redirect('admin/login')->with('tip','请先登录哦！');
         }
         return $next($request);
