@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Comment extends Model
 {
-    protected $fillable=['username','email','article_id','replay_id','href','content','ip'];
+    protected $fillable=['username','email','article_id','replay_id','href','content','ip','role'];
 
 //    添加评论
     static function addComment($data){

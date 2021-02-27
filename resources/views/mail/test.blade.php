@@ -8,8 +8,8 @@
     <title>邮件发送测试</title>
 </head>
 <body>
-    <h2>来自K先生个人博客的邮件测试</h2>
-    <p>{{$mailData['name']}}在你的文章评论了：</p>
+    <h2>来自K先生个人博客的评论或回复通知</h2>
+    <p>“{{$mailData['name']}}”这样回复了你的评论：</p>
     <p>{{$mailData['content']}}</p>
     <p>原文地址：<a href="{{$mailData['url'] ?? '#'}}">{{$mailData['url']?? '空'}}</a></p>
     <p style="text-align: right">来自K先生个人博客</p>

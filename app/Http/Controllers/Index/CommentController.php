@@ -29,14 +29,18 @@ class CommentController extends Controller
 //        header('Access-Control-Allow-Methods:POST,GET,OPTIONS,DELETE');
         if ($request->isMethod('POST')){
             $data=$request->all();
-//            dd($data);
             $res=Comment::addComment($data);
-
             $mailData=[
                 'name' => $data['username'],
                 'content'=>$data['content'],
                 'url' =>'http://www.gold404.cn/info/'.$data['article_id']
             ];
+            if (!empty($data['replay_id']) && $data['email']!="无"){
+                $replay=Comment::select('username','email')->find($data['replay_id']);
+                if ($replay->email !="无"){
+                    Mail::to($replay->email)->send(new TestMail($mailData));
+                }
+            }
             Mail::to('819123980@qq.com')->send(new TestMail($mailData));
             return $res;
         }
