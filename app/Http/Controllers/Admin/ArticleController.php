@@ -59,6 +59,7 @@ class ArticleController extends Controller
         if ($request ->isMethod('post')){
             $data=$this->getDesc($request -> all(),220);
             unset($data['_token']);
+            unset($data['s']);
             if (!$data['cover']){
                 unset($data['cover']);
             }
