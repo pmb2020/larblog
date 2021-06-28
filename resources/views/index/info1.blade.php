@@ -1,6 +1,6 @@
 @extends('layouts.index')
 
-@section('title',$infoData -> title .' - K先生个人博客')
+@section('title',$infoData['title'] .' - K先生个人博客')
 @section('keywords',$infoData -> keywords)
 @section('description',$infoData -> description)
 
