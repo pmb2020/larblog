@@ -1,8 +1,8 @@
 @extends('layouts.index')
 
 @section('title',$infoData['title'] .' - K先生个人博客')
-@section('keywords',$infoData -> keywords)
-@section('description',$infoData -> description)
+@section('keywords',$infoData['keywords'])
+@section('description',$infoData['description'])
 
 @section('style')
     <meta name="_token" content="{{ csrf_token() }}"/>
