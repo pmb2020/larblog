@@ -148,7 +148,7 @@
                                                     <a class="replay" href="javascript:void(0)" onclick="replayBox(this,{{$comment -> id}})">回复</a>
                                                 </div>
                                                 <!-- 回复 -->
-                                                @if($comment ->replayData)
+                                                @if(count($comment ->replaydata)>0)
                                                 <ul class="com2_ul">
                                                     @foreach($comment ->replayData as $item)
                                                     <li>

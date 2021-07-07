@@ -37,12 +37,12 @@ class InfoController extends Controller
             unset($v['replayData']);
             $v['replayData']=json_decode($temp,true);
         }
-
+//        return Comment::getComFromModel($id);
         return view('index.info1',[
             'infoData' => $infoData,
             'prev_article'=>$prev_article,
             'next_article'=>$next_article,
-            'comments'=>Comment::getComment(explode('.',$id)[0])
+            'comments'=>Comment::getComFromModel($id)
         ]);
     }
 }

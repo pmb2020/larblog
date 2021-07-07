@@ -14,6 +14,35 @@ class Comment extends Model
         $data['ip']=$_SERVER["REMOTE_ADDR"];
         return Comment::create($data);
     }
+
+    /**
+     *评论子类
+     * children
+     */
+    public function replayData(){
+        return $this->hasMany(Comment::class,'replay_id','id');
+    }
+
+    /**
+     * 通过模型子类来获取评论数据
+     */
+    static function getComFromModel($id){
+        $coms=Comment::where(['article_id'=>$id,'replay_id'=>0])
+            ->select(['id','href','username','content','created_at','zan_num'])
+            ->with(['replayData:id,href,replay_id,username,content,created_at,zan_num'])
+            ->orderBy('id','desc')
+            ->get();
+        foreach ($coms as $com){
+            $com->time=changeDate($com->created_at);
+            $childs=$com->replayData;
+            if (count($childs) >0){
+                foreach ($childs as $child){
+                    $child->time=changeDate($child->created_at);
+                }
+            }
+        }
+        return $coms;
+    }
     /**获取文章评论
      * @param $article_id
      * @return mixed
@@ -77,8 +106,6 @@ class Comment extends Model
     }
 
 }
-
-
 
 /**
  * 转换时间，超过7天才显示具体时间，否则，例如10分钟前

@@ -51,8 +51,7 @@ class CommentController extends Controller
         header('Content-Type:application/json;charset=utf-8;');
         header('Access-Control-Allow-Origin:*'); // *代表允许任何网址请求
 //        header('Access-Control-Allow-Methods:POST,GET,OPTIONS,DELETE'); // 允许请求的类型
-
-        return json_encode(Comment::getComment($id));
+        return Comment::getComFromModel($id);
+//        return json_encode(Comment::getComment($id));
     }
-
 }
