@@ -43,22 +43,22 @@
     <div class="row">
         <div class="col-md-7">
             <div class="info_snav">
-                <p>当前位置：<a href="/">首页</a> > <a href="{{url($infoData->category->slug)}}">{{$infoData -> category-> name}}</a> > <a href="#">正文</a></p>
+                <p>当前位置：<a href="/">首页</a> > <a href="{{url($infoData['category']['slug'])}}">{{$infoData['category']['name']}}</a> > <a href="#">正文</a></p>
             </div>
             <div class="content" style="margin-top: 0;padding-top: 15px;">
-                <h1 class="line_h2">{{$infoData->title}}</h1>
+                <h1 class="line_h2">{{$infoData['title']}}</h1>
                 <div class="user_info">
                     <span><i id="user_ico" class="ico"></i>K先生</span>
-                    <time><i id="time_ico" class="ico"></i>{{$infoData -> created_at}}</time>
-                    <span><i id="type_ico" class="ico"></i>{{$infoData -> category ->name ?? '未知分类'}}</span><span><i id="read_ico" class="ico"></i>{{$infoData->read_num}}</span>
+                    <time><i id="time_ico" class="ico"></i>{{$infoData['created_at']}}</time>
+                    <span><i id="type_ico" c lass="ico"></i>{{$infoData['category']['name'] ?? '未知分类'}}</span><span><i id="read_ico" class="ico"></i>{{$infoData['read_num']}}</span>
                 </div>
                 <div class="blog_text">
-                    {!! $infoData->content !!}
+                    {!! $infoData['content'] !!}
                 </div>
                 <!-- 文章版权说明 -->
                 <div class="banquan">
                     <p style="margin-bottom: 5px"><b>作者</b>：<a href="http://www.gold404.cn/about" style="margin-right: 15px">K先生</a><b>本文地址</b>：<a
-                            href="http://www.gold404.cn/info/{{$infoData->id}}" title="{{$infoData->title}}">http://www.gold404.cn/info/{{$infoData->id}}</a></p>
+                            href="http://www.gold404.cn/info/{{$infoData['id']}}" title="{{$infoData['title']}}">http://www.gold404.cn/info/{{$infoData['id']}}</a></p>
                     <p><b>版权声明</b>：本文为原创文章，版权归 <a href="http://www.gold404.cn">K先生个人博客</a> 所有，欢迎分享本文，转载请保留出处，谢谢！</p>
                 </div>
                 <div class="next_div">
@@ -89,7 +89,7 @@
                 <!-- <p style="color: #888;">暂无评论</p> -->
                 <div class="container">
                     <div class="comment_body">
-                        <input type="hidden" name="article_id" value="{{$infoData->id}}" />
+                        <input type="hidden" name="article_id" value="{{$infoData['id']}}" />
                         <h4 class="com_h4">文章评论</h4>
                         <form id="form0" action="#" method="post" onsubmit="return false">
                             <div class="input-box">
