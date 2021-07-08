@@ -22,8 +22,7 @@ class InfoController extends Controller
 //                'articles.created_at','categories.name')
 //            ->leftJoin('categories','articles.category_id','=','categories.id')->
 //            first();
-        $infoData=Article::where('id',$id)->with('Category:id,pid,name,slug')->first();
-//        dd($infoData->toArray());
+        $infoData=Article::where('id',$id)->with('Category:id,pid,name,slug')->first()->toArray();
         $prev_article = Article::where('id','<',$id)->select('id','title')->orderBy('id','desc')->first();
         $next_article = Article::where('id','>',$id)->select('id','title')->orderBy('id','asc')->first();
         $comments=Comment::where([
