@@ -22,7 +22,7 @@ class InfoController extends Controller
 //                'articles.created_at','categories.name')
 //            ->leftJoin('categories','articles.category_id','=','categories.id')->
 //            first();
-        $infoData=Article::where('id',$id)->with('Category:id,pid,name,slug')->first()->toArray();
+        $infoData=Article::where('id',$id)->with('Category:id,pid,name,slug')->first();
         $prev_article = Article::where('id','<',$id)->select('id','title')->orderBy('id','desc')->first();
         $next_article = Article::where('id','>',$id)->select('id','title')->orderBy('id','asc')->first();
         $comments=Comment::where([
@@ -38,7 +38,7 @@ class InfoController extends Controller
         }
 //        return Comment::getComFromModel($id);
         return view('index.info1',[
-            'infoData' => $infoData,
+            'infoData' => empty($infoData) ? array() : $infoData->toArray(),
             'prev_article'=>$prev_article,
             'next_article'=>$next_article,
             'comments'=>Comment::getComFromModel($id)
